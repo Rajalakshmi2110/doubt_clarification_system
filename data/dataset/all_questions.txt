@@ -1,0 +1,48 @@
+1. Compare the functionality of a hub and a switch in relation to collision domains and specify their influence on overall network performance.
+2. Consider a stream of binary data consisting of a long sequence of 1s followed by a zero followed by a long string of 1s. Draw the waveform for Bipolar - AMI and Pseudoternary schemes.
+3. State the reason for the reduced number of layers in TCP/IP model comparing with OSI model.
+4. Represent the digital data 001101000010 as modulated BFSK and BPSK waveforms.
+5. What is the main difference between fiber optic cables and twisted pair cables in terms of data transmission?
+6. A channel has a data rate of 4 kbps and a propagation delay of 20ms. For what range of frame sizes does stop and wait give an efficiency of at least 50%?
+7. Given message is M (X) = X5 + X4+X+ 1 and the generator is G(X) X4+X3+1. Compute CRC.
+8. Why IEEE 802.11 frame uses 4 address fields?
+9. Why CSMA/CD is not suitable for Ad hoc networks?
+10. A Class C network 192.168.1.0 is sub-netted with a subnet mask of 255.255.255.240. List the number of networks and the number of hosts per network.
+11. Why IPv6 header size is not increased proportionately with the rate of increase of its address bits compared with IPv4?
+12. What are the application and transport layer protocols involved when an e-mail containing text and image is sent from host A to host B?
+13. State the functionality of UDP at the receiver host.
+14. How TCP ensures reliability with an unreliable lower layer service?
+15. Why the Transport layer and Network layer cannot be combined as a single layer?
+16. State the significant difference in the operations of a Switch and Bridge.
+17. If the RTT from sender to the receiver is 120ms and all links in the network have a 155 Mbps, how many bytes of data can fit in the "pipe"?
+18. What are the advantages of doing reassembly at the ultimate destination instead of doing it after the datagram travels across the network?
+19. Which is the network address to which packets with the following IP address will be sent: i) 127.29.12.78 ii) 159.78.9.10 iii) 192.20.10.11 iv) 230.23.88.99
+20. Specify the need for providing similar services in data link and transport layer.
+21. Why FTP uses 2 port numbers?
+22. State the significance of SMI in network management.
+23. Compare traditional switch with SDN enabled switch in terms of handling forwarding decisions.
+24. Why CSMA/CD is not appropriate for full-duplex Ethernet environment?
+25. Differentiate between Router and Gateway.
+26. If the packet has to go through 3 routers, how many times will encapsulation and decapsulation take place?
+27. List out any three issues in the data link layer.
+28. Draw the IEEE 802.3 frame format.
+29. Differentiate between ARP and DHCP protocol.
+30. Indicate the Class/type of the following IP addresses: a) 134.53.0.0 b) 1.78.9.23
+31. How TCP provide reliable data delivery? Justify your answer.
+32. Describe the various part of HTTP.
+33. List out some open source network monitoring tools.
+34. Mention few points about Software Defined Network.
+35. List any two applications that you use on daily basis that requires very high bandwidth from the network?
+36. If the packet has to go through 2 routers, how many times will encapsulation and decapsulation take place?
+37. Differentiate between a modem, a switch and a router.
+38. Data is sent in 1000-byte segments over a fiber line with a distance of 10000km. link bandwidth is 2Gbps. An ACK packet of 100 bytes is returned. Calculate the RTT. How many data segments should be sent in an RTT to obtain 100% utilization of bandwidth.
+39. Mention about the following HTTP Status Response codes 200, 301, 400, 401, 505.
+40. How the 3-way handshaking process is differ from 2-way, connection establishment in TCP?
+41. Show the TCP connections that will have to be established to download 4 files between an FTP client and an FTP server.
+42. Why RCC of Anna university getting your MAC address instead of IP Address in Wi-Fi registration Form?
+43. What is silly window syndrome in TCP?
+44. Differentiate between circuit switching and packet switching.
+45. Indicate the class / type of the following IP addresses: a) 220.24.88.99 b) 6.75.10.68
+46. Suppose hosts A and B are assigned the same IP address on the Ethernet, on which ARP is used, B starts up after A. What will happen?
+47. Mention the salient features of IPv6.
+48. List out any three issues in the data link layer.
