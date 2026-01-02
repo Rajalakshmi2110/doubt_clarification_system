@@ -1,0 +1,9 @@
+{
+  "total_examples": 48,
+  "train_examples": 38,
+  "val_examples": 5,
+  "test_examples": 5,
+  "split_ratio": "80:10:10",
+  "retrieval_k": 4,
+  "model_used": "all-MiniLM-L6-v2"
+}
