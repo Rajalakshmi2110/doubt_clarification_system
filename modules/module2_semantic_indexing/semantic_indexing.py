@@ -62,12 +62,30 @@ class SemanticIndexer:
     
     def load_index(self, index_path: str = "data/processed/textbook_faiss.index",
                    metadata_path: str = "data/processed/textbook_metadata.pkl"):
-        """Load existing FAISS index and metadata"""
-        self.index = faiss.read_index(index_path)
-        
-        with open(metadata_path, 'rb') as f:
-            self.chunk_metadata = pickle.load(f)
-        
+        """Load existing FAISS index and metadata (with helpful checks)"""
+        from pathlib import Path
+
+        # Check that the files exist and provide actionable errors
+        if not Path(index_path).exists():
+            raise FileNotFoundError(
+                f"FAISS index not found at {index_path}. You can build it by running Module 2: 'python modules/module2_semantic_indexing/semantic_indexing.py' or call build_textbook_index()."
+            )
+        if not Path(metadata_path).exists():
+            raise FileNotFoundError(
+                f"Metadata file not found at {metadata_path}. You can build it by running Module 2."
+            )
+
+        try:
+            self.index = faiss.read_index(index_path)
+        except Exception as e:
+            raise RuntimeError(f"Failed to read FAISS index at {index_path}: {e}")
+
+        try:
+            with open(metadata_path, 'rb') as f:
+                self.chunk_metadata = pickle.load(f)
+        except Exception as e:
+            raise RuntimeError(f"Failed to load metadata from {metadata_path}: {e}")
+
         print(f"Loaded index with {self.index.ntotal} vectors")
         return self.index
     

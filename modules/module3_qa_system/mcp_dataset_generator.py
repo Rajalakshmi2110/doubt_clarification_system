@@ -26,10 +26,25 @@ class MCPDatasetGenerator:
         self.metadata_path = "data/processed/textbook_metadata.pkl"
         self.qa_dataset_path = "data/dataset/cleaned_questions.json"
         
-        # Load FAISS index and metadata
-        self.index = faiss.read_index(self.faiss_index_path)
-        with open(self.metadata_path, 'rb') as f:
-            self.metadata = pickle.load(f)
+        # Load FAISS index and metadata with checks
+        from pathlib import Path
+        if not Path(self.faiss_index_path).exists():
+            raise FileNotFoundError(
+                f"FAISS index not found at {self.faiss_index_path}. Build the index first (Module 2)."
+            )
+        if not Path(self.metadata_path).exists():
+            raise FileNotFoundError(
+                f"Metadata file not found at {self.metadata_path}. Build the index first (Module 2)."
+            )
+        try:
+            self.index = faiss.read_index(self.faiss_index_path)
+        except Exception as e:
+            raise RuntimeError(f"Failed to read FAISS index at {self.faiss_index_path}: {e}")
+        try:
+            with open(self.metadata_path, 'rb') as f:
+                self.metadata = pickle.load(f)
+        except Exception as e:
+            raise RuntimeError(f"Failed to load metadata from {self.metadata_path}: {e}")
         
         print(f"Loaded FAISS index with {self.index.ntotal} textbook chunks")
     

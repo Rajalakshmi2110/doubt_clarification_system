@@ -1,0 +1,14 @@
+UNIT I Introduction to Computer Networks
+This unit covers the basics and fundamentals of computer networks, including topologies, network types (LAN, WAN), and basic terminology.
+
+UNIT II Transport Layer
+Topics include transport-layer protocols such as TCP and UDP, connection management, flow and congestion control.
+
+UNIT III Network Layer
+Topics include IP addressing, subnetting, routing algorithms, and packet forwarding.
+
+UNIT IV Network Security
+Topics include encryption, authentication, access control, and secure protocols.
+
+UNIT V Applications
+Topics include networked applications such as HTTP, FTP, email protocols, and application-layer services.
