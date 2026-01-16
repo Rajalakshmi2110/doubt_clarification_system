@@ -1,20 +1,38 @@
-# Trained models
-models/
-*.bin
-*.pt
-*.safetensors
-
-# Cache and temporary files
+# Python
 __pycache__/
-*.pyc
-*.pyo
-.cache/
-.pytest_cache/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
 
-# IDE files
+# Module 5 - Web Interface (exclude for 30% review)
+frontend/
+flask_server.py
+start_backend.bat
+sample_questions.json
+
+# Large model files (optional - comment out if you want to push model)
+models/flan_t5_mcp/model.safetensors
+
+# Data files
+data/raw/textbooks/*.pdf
+data/raw/notes/*.pdf
+data/raw/syllabus/*.pdf
+
+# IDE
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# OS files
+# OS
 .DS_Store
 Thumbs.db
+
+# Logs
+*.log
