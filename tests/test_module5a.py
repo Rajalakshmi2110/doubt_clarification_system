@@ -28,6 +28,14 @@ def test_validation_pipeline():
         ("Wht is TCP protocl", True, "Should auto-correct spelling"),
         ("explain osi model", True, "Should add question mark"),
         
+        # Technical correctness tests
+        ("HTTP operates at transport layer", False, "Technical error - HTTP is application layer"),
+        ("TCP operates at network layer", False, "Technical error - TCP is transport layer"),
+        ("ICMP operates at transport layer", False, "Technical error - ICMP is network layer"),
+        ("What would happen if TCP used MAC addresses?", False, "Cross-layer conceptual error"),
+        ("If DNS used TCP-like error correction?", True, "Valid hypothetical question"),
+        ("Compare TCP and UDP at transport layer", True, "Technically correct comparison"),
+        
         # Off-topic questions
         ("What is machine learning?", False, "Not Computer Networks related"),
         ("How to cook pasta?", False, "Completely off-topic"),

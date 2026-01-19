@@ -21,10 +21,4 @@ def test_questions():
         print("-" * 50)
 
 if __name__ == "__main__":
-    print("=== Module 5A Question Validator Test ===")
-    print("Try these examples:")
-    print("- What is TCP?")
-    print("- Wht is OSI protocl")
-    print("- How to cook pasta?")
-    print("- asdf qwerty")
     test_questions()

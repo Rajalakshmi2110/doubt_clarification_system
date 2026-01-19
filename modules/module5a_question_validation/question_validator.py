@@ -58,7 +58,12 @@ class QuestionValidator:
             'wht': 'what',
             'hw': 'how',
             'explian': 'explain',
-            'defin': 'define'
+            'defin': 'define',
+            'tcps': 'tcp',
+            'udps': 'udp',
+            'https': 'http',
+            'ftps': 'ftp',
+            'smtps': 'smtp'
         }
         
         # Apply specific corrections
@@ -149,10 +154,13 @@ class QuestionValidator:
         """Step 3: Check if question is relevant to Computer Networks syllabus"""
         question_lower = question.lower()
         
-        # Direct keyword matching
+        # Direct keyword matching (exact words only)
         keyword_matches = []
+        question_words = question_lower.split()
+        
         for keyword in self.all_keywords:
-            if keyword.lower() in question_lower:
+            # Check for exact word matches or common variations
+            if keyword in question_words or any(keyword in word for word in question_words if len(word) > 3):
                 keyword_matches.append(keyword)
         
         # Calculate relevance score
