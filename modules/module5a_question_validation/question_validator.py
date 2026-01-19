@@ -4,8 +4,9 @@ Purpose: Validate and correct user questions before processing
 """
 
 import re
+import json
 import spacy
-from textblob import TextBlob
+from pathlib import Path
 from sentence_transformers import SentenceTransformer
 import numpy as np
 from typing import Dict, List, Tuple
@@ -16,31 +17,18 @@ class QuestionValidator:
         self.nlp = spacy.load("en_core_web_sm")
         self.sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
         
-        # Computer Networks syllabus keywords with layer mapping
-        self.syllabus_keywords = {
-            "unit1": ["network", "protocol", "osi", "tcp/ip", "data communication", "transmission"],
-            "unit2": ["physical layer", "data link", "ethernet", "frame", "error detection", "flow control"],
-            "unit3": ["network layer", "routing", "ip", "subnet", "nat", "dhcp", "icmp"],
-            "unit4": ["transport layer", "tcp", "udp", "socket", "port", "congestion control"],
-            "unit5": ["application layer", "http", "dns", "ftp", "smtp", "snmp"]
-        }
+        # Load configuration from JSON
+        config_path = Path(__file__).parent / 'validation_config.json'
+        with open(config_path, 'r') as f:
+            self.config = json.load(f)
         
-        # Protocol-to-layer mapping for technical validation
-        self.protocol_layers = {
-            "http": "application layer",
-            "https": "application layer", 
-            "ftp": "application layer",
-            "smtp": "application layer",
-            "dns": "application layer",
-            "snmp": "application layer",
-            "tcp": "transport layer",
-            "udp": "transport layer",
-            "ip": "network layer",
-            "icmp": "network layer",
-            "dhcp": "network layer",
-            "ethernet": "data link layer",
-            "arp": "data link layer"
-        }
+        # Extract config data
+        self.spell_corrections = self.config['spell_corrections']
+        self.syllabus_keywords = self.config['syllabus_keywords']
+        self.protocol_layers = self.config['protocol_layers']
+        self.thresholds = self.config['thresholds']
+        self.question_words = self.config['question_words']
+        self.syllabus_topics = self.config['syllabus_topics']
         
         # Flatten keywords for relevance checking
         self.all_keywords = []
@@ -49,26 +37,9 @@ class QuestionValidator:
     
     def correct_grammar_spelling(self, question: str) -> str:
         """Step 1: Basic grammar fixes (minimal spell correction)"""
-        # Simple typo corrections for common networking terms
-        corrections = {
-            'protocl': 'protocol',
-            'protcol': 'protocol', 
-            'netwrk': 'network',
-            'routng': 'routing',
-            'wht': 'what',
-            'hw': 'how',
-            'explian': 'explain',
-            'defin': 'define',
-            'tcps': 'tcp',
-            'udps': 'udp',
-            'https': 'http',
-            'ftps': 'ftp',
-            'smtps': 'smtp'
-        }
-        
-        # Apply specific corrections
+        # Apply specific corrections from config
         corrected = question
-        for typo, correct in corrections.items():
+        for typo, correct in self.spell_corrections.items():
             corrected = re.sub(r'\b' + typo + r'\b', correct, corrected, flags=re.IGNORECASE)
         
         # Basic grammar fixes
@@ -88,12 +59,12 @@ class QuestionValidator:
         # Check for minimum requirements
         has_verb = any(token.pos_ == "VERB" for token in doc)
         has_noun = any(token.pos_ in ["NOUN", "PROPN"] for token in doc)
-        has_question_word = any(token.text.lower() in ["what", "how", "why", "when", "where", "which", "who"] for token in doc)
+        has_question_word = any(token.text.lower() in self.question_words for token in doc)
         word_count = len([token for token in doc if token.is_alpha])
         
         # Sanity checks
-        if word_count < 3:
-            return False, "Question too short (minimum 3 words required)"
+        if word_count < self.thresholds['min_words']:
+            return False, f"Question too short (minimum {self.thresholds['min_words']} words required)"
         
         # Check for basic question structure (verb OR question word)
         if not (has_verb or has_question_word or has_noun):
@@ -106,7 +77,7 @@ class QuestionValidator:
         
         # Check if most words are very short (likely gibberish)
         short_words = [word for word in alpha_words if len(word) <= 2]
-        if len(short_words) > len(alpha_words) * 0.8:
+        if len(short_words) > len(alpha_words) * self.thresholds['gibberish_threshold']:
             return False, "Question appears to be gibberish (too many very short words)"
         
         return True, "Question is semantically valid"
@@ -123,30 +94,15 @@ class QuestionValidator:
                     if layer in question_lower and layer != correct_layer:
                         return False, f"Technical error: {protocol.upper()} operates at {correct_layer}, not {layer}"
         
-        # Check for common misconceptions
-        misconceptions = [
-            (["http", "transport"], "HTTP operates at application layer, not transport layer"),
-            (["tcp", "application"], "TCP operates at transport layer, not application layer"),
-            (["ip", "transport"], "IP operates at network layer, not transport layer"),
-            (["ethernet", "network"], "Ethernet operates at data link layer, not network layer")
-        ]
+        # Check for common misconceptions from config
+        for rule in self.config['validation_rules']['misconceptions']:
+            if all(keyword in question_lower for keyword in rule['keywords']):
+                return False, f"Technical error: {rule['message']}"
         
-        for keywords, error_msg in misconceptions:
-            if all(keyword in question_lower for keyword in keywords):
-                return False, f"Technical error: {error_msg}"
-        
-        # Check for cross-layer conceptual errors
-        cross_layer_errors = [
-            (["tcp", "mac"], "TCP operates at transport layer and doesn't handle MAC addresses (data link layer)"),
-            (["http", "mac"], "HTTP operates at application layer and doesn't handle MAC addresses (data link layer)"),
-            (["ip", "mac"], "IP addresses and MAC addresses serve different purposes at different layers"),
-            (["tcp", "physical"], "TCP operates at transport layer, not physical layer"),
-            (["http", "routing"], "HTTP operates at application layer and doesn't handle routing (network layer function)")
-        ]
-        
-        for keywords, error_msg in cross_layer_errors:
-            if all(keyword in question_lower for keyword in keywords):
-                return False, f"Conceptual error: {error_msg}"
+        # Check for cross-layer conceptual errors from config
+        for rule in self.config['validation_rules']['cross_layer_errors']:
+            if all(keyword in question_lower for keyword in rule['keywords']):
+                return False, f"Conceptual error: {rule['message']}"
         
         return True, "No technical errors detected"
     
@@ -168,26 +124,18 @@ class QuestionValidator:
             relevance_score = len(keyword_matches) / len(question.split()) * 100
             relevance_score = min(relevance_score, 100)  # Cap at 100%
             
-            if relevance_score >= 10:  # At least 10% keyword density
+            if relevance_score >= self.thresholds['relevance_threshold']:  # Configurable threshold
                 return True, f"Relevant to Computer Networks (keywords: {', '.join(keyword_matches)})", relevance_score
         
-        # Semantic similarity check with syllabus topics
-        syllabus_topics = [
-            "computer networks and protocols",
-            "data link layer and ethernet",
-            "network layer and routing",
-            "transport layer tcp udp",
-            "application layer protocols"
-        ]
-        
+        # Semantic similarity check with syllabus topics from config
         question_embedding = self.sentence_model.encode([question])
-        topic_embeddings = self.sentence_model.encode(syllabus_topics)
+        topic_embeddings = self.sentence_model.encode(self.syllabus_topics)
         
         similarities = np.dot(question_embedding, topic_embeddings.T)[0]
         max_similarity = float(np.max(similarities))
         
-        if max_similarity >= 0.3:  # 30% semantic similarity threshold
-            best_topic = syllabus_topics[np.argmax(similarities)]
+        if max_similarity >= self.thresholds['similarity_threshold']:  # Configurable threshold
+            best_topic = self.syllabus_topics[np.argmax(similarities)]
             return True, f"Semantically relevant to: {best_topic}", max_similarity * 100
         
         return False, "Question not relevant to Computer Networks syllabus", max_similarity * 100

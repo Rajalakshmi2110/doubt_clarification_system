@@ -1,0 +1,190 @@
+{
+  "spell_corrections": {
+    "protocl": "protocol",
+    "protcol": "protocol", 
+    "netwrk": "network",
+    "routng": "routing",
+    "wht": "what",
+    "hw": "how",
+    "explian": "explain",
+    "defin": "define",
+    "tcps": "tcp",
+    "udps": "udp",
+    "datalink": "data link",
+    "netlayer": "network layer",
+    "transportlayer": "transport layer",
+    "applicationlayer": "application layer",
+    "physicalayer": "physical layer"
+  },
+  
+  "grammar_fixes": {
+    "missing_verb_patterns": [
+      {"pattern": "what (\\w+) (\\w+)", "replacement": "what is \\1 \\2"},
+      {"pattern": "how (\\w+) (\\w+)", "replacement": "how does \\1 \\2"}
+    ]
+  },
+  
+  "rejection_rules": {
+    "impossible_scenarios": [
+      {
+        "keywords": ["tcp", "mac", "address"],
+        "message": "TCP cannot use MAC addresses - they operate at different layers",
+        "reason": "Violates networking architecture"
+      },
+      {
+        "keywords": ["router", "mac", "route"],
+        "message": "Routers use IP addresses for routing, not MAC addresses",
+        "reason": "Violates routing principles"
+      },
+      {
+        "keywords": ["ip", "without", "network"],
+        "message": "IP cannot work without the network layer",
+        "reason": "Violates protocol stack architecture"
+      }
+    ],
+    
+    "ambiguous_questions": [
+      {
+        "patterns": ["explain tcp", "what is routing", "describe osi"],
+        "message": "Question too broad - please specify which aspect you want to know about",
+        "suggestion": "Try: 'Explain TCP connection establishment' or 'What is TCP flow control?'"
+      }
+    ],
+    
+    "non_academic_tone": [
+      {
+        "keywords": ["bro", "dude", "fast", "quick", "everything"],
+        "message": "Please use academic language for technical questions",
+        "suggestion": "Rephrase using formal terminology"
+      }
+    ],
+    
+    "out_of_syllabus": [
+      {
+        "keywords": ["blockchain", "kubernetes", "docker", "machine learning", "ai"],
+        "message": "Question is outside Computer Networks syllabus",
+        "suggestion": "Focus on networking protocols, layers, or network architecture"
+      }
+    ]
+  },
+  
+  "validation_weights": {
+    "semantic_sanity": 0.25,
+    "technical_accuracy": 0.35,
+    "syllabus_relevance": 0.40
+  },
+  
+  "scoring_thresholds": {
+    "pass_threshold": 0.6,
+    "warning_threshold": 0.4,
+    "min_words": 3,
+    "gibberish_threshold": 0.8,
+    "similarity_threshold": 0.3
+  },
+  
+  "syllabus_units": {
+    "unit1": {
+      "title": "Introduction to Computer Networks",
+      "description": "Basic concepts of computer networks, protocols, OSI model, TCP/IP architecture, and data communication fundamentals",
+      "keywords": ["network", "protocol", "osi", "tcp/ip", "data communication", "transmission"]
+    },
+    "unit2": {
+      "title": "Physical and Data Link Layer", 
+      "description": "Physical layer transmission, data link layer protocols, Ethernet, frame structure, error detection and flow control mechanisms",
+      "keywords": ["physical layer", "data link", "ethernet", "frame", "error detection", "flow control"]
+    },
+    "unit3": {
+      "title": "Network Layer",
+      "description": "Network layer protocols, IP addressing, routing algorithms, subnetting, NAT, DHCP, and ICMP protocols", 
+      "keywords": ["network layer", "routing", "ip", "subnet", "nat", "dhcp", "icmp"]
+    },
+    "unit4": {
+      "title": "Transport Layer",
+      "description": "Transport layer services, TCP and UDP protocols, socket programming, port numbers, and congestion control",
+      "keywords": ["transport layer", "tcp", "udp", "socket", "port", "congestion control"]
+    },
+    "unit5": {
+      "title": "Application Layer",
+      "description": "Application layer protocols including HTTP, DNS, FTP, SMTP, SNMP and web services",
+      "keywords": ["application layer", "http", "dns", "ftp", "smtp", "snmp"]
+    }
+  },
+  
+  "protocol_layers": {
+    "http": "application layer",
+    "https": "application layer", 
+    "ftp": "application layer",
+    "smtp": "application layer",
+    "dns": "application layer",
+    "snmp": "application layer",
+    "tcp": "transport layer",
+    "udp": "transport layer",
+    "ip": "network layer",
+    "icmp": "network layer",
+    "dhcp": "network layer",
+    "ethernet": "data link layer",
+    "arp": "data link layer"
+  },
+  
+  "validation_rules": {
+    "misconceptions": [
+      {
+        "keywords": ["http", "transport"],
+        "message": "HTTP operates at application layer, not transport layer",
+        "severity": "high",
+        "suggestion": "Try asking about HTTP at the application layer or TCP at the transport layer",
+        "action": "reject"
+      },
+      {
+        "keywords": ["tcp", "application"],
+        "message": "TCP operates at transport layer, not application layer",
+        "severity": "high",
+        "suggestion": "Consider asking about TCP's transport layer functions or application layer protocols like HTTP",
+        "action": "reject"
+      },
+      {
+        "keywords": ["ip", "transport"],
+        "message": "IP operates at network layer, not transport layer",
+        "severity": "medium",
+        "suggestion": "Ask about IP routing at network layer or TCP/UDP at transport layer",
+        "action": "reject"
+      },
+      {
+        "keywords": ["ethernet", "network"],
+        "message": "Ethernet operates at data link layer, not network layer",
+        "severity": "medium",
+        "suggestion": "Focus on Ethernet frames at data link layer or IP at network layer",
+        "action": "reject"
+      }
+    ],
+    
+    "cross_layer_errors": [
+      {
+        "keywords": ["tcp", "mac"],
+        "message": "TCP operates at transport layer and doesn't handle MAC addresses (data link layer)",
+        "severity": "high",
+        "suggestion": "Ask about TCP port numbers or Ethernet MAC addresses separately",
+        "action": "reject"
+      },
+      {
+        "keywords": ["http", "mac"],
+        "message": "HTTP operates at application layer and doesn't handle MAC addresses (data link layer)",
+        "severity": "high", 
+        "suggestion": "Consider HTTP methods/headers or Ethernet addressing as separate topics",
+        "action": "reject"
+      },
+      {
+        "keywords": ["ip", "mac"],
+        "message": "IP addresses and MAC addresses serve different purposes at different layers",
+        "severity": "medium",
+        "suggestion": "Ask about IP addressing or MAC addressing as distinct concepts",
+        "action": "reject"
+      }
+    ]
+  },
+  
+  "valid_question_types": ["definition", "explanation", "comparison", "mechanism", "controlled_hypothetical"],
+  "invalid_question_types": ["impossible_hypothetical", "opinion_based", "too_broad"],
+  
+  "question_words": ["what", "how", "why", "when", "where", "which", "who", "explain", "describe", "compare", "define"]
+}
