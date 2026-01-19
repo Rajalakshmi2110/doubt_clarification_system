@@ -1,0 +1,317 @@
+### **Unit I: Data Communication and Networking**
+
+1. **What are the primary components of a data communication system?**
+A data communication system has five components: the **message**, the **sender**, the **receiver**, the **transmission medium**, and the **protocol**.
+
+2. **What is the function of the transmitter in a communications model?**
+The **transmitter** transforms and encodes information into electromagnetic signals that can be propagated across a transmission system.
+
+3. **Differentiate between a host and an end system.**
+The sources use these terms **interchangeably**; they refer to computing devices like PCs, servers, and mobile units that sit at the "edge" of the network.
+
+4. **How does a switch differ from a hub regarding collision domains?**
+A **hub** creates a single collision domain where only one station can transmit at a time, whereas a **switch** provides dedicated capacity to each station, effectively eliminating collisions.
+
+5. **Define the role of a gateway in an internetwork.**
+A gateway connects networks using different protocols or architectures, performing protocol translation when required.
+
+6. **What is the "network core"?**
+The **network core** is the mesh of packet switches and links that interconnects the Internet’s end systems.
+
+7. **Compare the OSI and TCP/IP protocol architectures.**
+**TCP/IP** has five layers (Physical, Network Access, Internet, Transport, Application), while **OSI** has seven, adding Session and Presentation layers.
+
+8. **What are the key elements of a protocol?**
+A protocol consists of **syntax** (format), **semantics** (control and error handling), and **timing** (speed matching).
+
+9. **What is encapsulation in networking?**
+**Encapsulation** is the process of adding control information (headers/trailers) to data at each layer of the protocol stack.
+
+10. **Define a "switched communications network."**
+It is a network where data are routed from source to destination by being **switched from node to node** rather than being broadcast to everyone.
+
+11. **What is the purpose of the "Internet Layer" in TCP/IP?**
+It handles the **routing of data** through the internet across multiple networks using the Internet Protocol (IP).
+
+12. **Define a "Broadcast Network."**
+In a **broadcast network**, a transmission from one station is received by all other stations sharing the same medium.
+
+13. **What are "Trunks" in a public telecommunications network?**
+**Trunks** are high-capacity branches between exchanges that carry multiple voice/data circuits using multiplexing.
+
+14. **What is the primary function of the "Physical Layer"?**
+It covers the **physical interface** and transmission of unstructured bit streams over a physical medium.
+
+15. **Explain the term "Address Scope."**
+It refers to whether an address is **global** (unique across the internet) or **local** (unique only within a specific network).
+
+16. **What is "Upward Multiplexing"?**
+It occurs when **multiple higher-layer connections** are multiplexed onto a single lower-layer connection [18.1, 2508].
+
+17. **What is a "Router"?**
+A **router** is a Layer 3 device that routes packets between potentially different networks using a forwarding table.
+
+18. **Why is the "Best-Effort" service model used in the IP layer?**
+It is used because it provides a **simple, scalable delivery** mechanism without making strict guarantees on delay or loss.
+
+19. **What are the three agents involved in communication?**
+Communication involves **applications**, **computers**, and **networks**.
+
+20. **Define "Peer Layers."**
+**Peer layers** are the corresponding layers in two different systems that communicate using a specific protocol.
+
+---
+
+### **Unit II: Physical and Data Link Layers**
+
+21. **What is the main advantage of optical fiber over twisted pair?**
+Optical fiber offers **higher bandwidth**, lower attenuation, and complete immunity to electromagnetic interference.
+
+22. **What are the two varieties of twisted pair cable?**
+They are **Unshielded Twisted Pair (UTP)** and **Shielded Twisted Pair (STP)**.
+
+23. **Define "Forward Error Correction" (FEC).**
+FEC is the ability of a receiver to **detect and correct errors** in a bit stream without requesting a retransmission.
+
+24. **How does a "Cyclic Redundancy Check" (CRC) work?**
+The sender appends bits to data so the resulting frame is **exactly divisible by a predetermined divisor**; the receiver checks for a remainder.
+
+25. **What is the "Hidden Terminal Problem"?**
+It occurs in wireless networks when physical obstructions prevent a station from sensing that another station is currently transmitting.
+
+26. **What is the function of the "MAC" sublayer?**
+The **Medium Access Control** sublayer governs access to the shared transmission medium.
+
+27. **How does "Sliding-Window" flow control work?**
+A sender can transmit **multiple frames (a window)** before needing an acknowledgment, improving efficiency over long-delay links.
+
+28. **Define "Bit Stuffing."**
+It is a technique used in bit-oriented protocols like HDLC to ensure a **flag pattern** does not appear in the middle of a frame.
+
+29. **What is the "Binary Exponential Backoff" algorithm?**
+It is a method where a station **increases its wait time** exponentially after repeated collisions to reduce the probability of further collisions.
+
+30. **What is a "VLAN"?**
+A **Virtual Local Area Network** is a logical partition of a physical switch that isolates traffic as if it were on a separate network.
+
+31. **Explain "CSMA/CA."**
+Used in 802.11 WiFi, **Carrier Sense Multiple Access with Collision Avoidance** uses "handshaking" (RTS/CTS) to avoid collisions before they occur.
+
+32. **What is "Bluetooth"?**
+It is a short-range, low-power **Wireless Personal Area Network (WPAN)** technology designed for cable replacement.
+
+33. **What are the issues addressed by the Data Link Layer?**
+Key issues include **framing**, **link access (MAC)**, and **error/flow control**.
+
+34. **What is "Propagation Delay"?**
+It is the time it takes for a bit to **travel from the sender to the receiver** across the medium.
+
+35. **Explain the "Stop-and-Wait" protocol.**
+The sender transmits one frame and **waits for an ACK** before sending the next; it is simple but inefficient on long-delay links.
+
+36. **What are "Collision Domains"?**
+A **collision domain** is a network segment where simultaneous transmissions from two or more devices will result in a collision.
+
+37. **What is the "Preamble" in an Ethernet frame?**
+It is a 7-byte pattern used to **synchronize the receiver's clock** with the transmitter.
+
+38. **Define "Bipolar-AMI."**
+A signaling scheme where **binary 0 is zero voltage** and **binary 1 is represented by alternating pulses** of positive and negative polarity.
+
+39. **What is a "Modem"?**
+A device that performs **modulation and demodulation**, converting digital data into analog signals for transmission over analog lines.
+
+40. **How does "Differential Manchester" encoding work?**
+The transition at the **middle of the bit interval** is for clocking, while the **presence or absence of a transition at the start** represents the data bit.
+
+---
+
+### **Unit III: Network Layer**
+
+41. **What is the difference between "Routing" and "Forwarding"?**
+**Routing** is the network-wide process of planning paths, while **forwarding** is the local action of moving a packet from input to output.
+
+42. **Explain "Distance-Vector Routing."**
+Each router maintains a table of distances to all destinations and **periodically exchanges this table with its neighbors**.
+
+43. **Define "Link-State Routing."**
+Each router broadcasts the status of its **directly connected links** to all other routers, allowing everyone to build a complete network map.
+
+44. **What is the "Bellman-Ford Equation"?**
+It states that the least cost from $x$ to $y$ is the **minimum of the cost to a neighbor $v$ plus the least cost from $v$ to $y$**.
+
+45. **Define "Autonomous System" (AS).**
+An AS is a set of routers and networks **under a single administrative control** using a common interior routing protocol.
+
+46. **What is the role of "BGP"?**
+The **Border Gateway Protocol** is the "glue" of the Internet, used to exchange reachability information **between different autonomous systems**.
+
+47. **What is "CIDR"?**
+**Classless Inter-Domain Routing** replaces the classful address system by allowing **variable-length network prefixes**.
+
+48. **Explain "Subnetting."**
+It is the practice of **partitioning a single network address** into multiple smaller logical sub-networks using a subnet mask.
+
+49. **What does "DHCP" provide?**
+The **Dynamic Host Configuration Protocol** allows hosts to **automatically obtain an IP address**, subnet mask, and default gateway.
+
+50. **Define "NAT."**
+**Network Address Translation** allows a private network to use one public IP address for all its internal devices by **mapping internal IP/ports to external ones**.
+
+51. **What is "ICMP"?**
+The **Internet Control Message Protocol** is used by routers and hosts to **communicate network-level information**, such as error reporting.
+
+52. **Why was IPv6 developed?**
+It was created primarily because the **32-bit address space of IPv4 was being exhausted**.
+
+53. **What is "IP-Anycast"?**
+A service where a packet is routed to the **nearest** server among a group of servers sharing the same IP address.
+
+54. **What is the "Count-to-Infinity" problem?**
+A routing loop in Distance Vector protocols where an unreachable destination's distance **slowly increases toward infinity** during update cycles.
+
+55. **Explain "Hot Potato Routing."**
+A strategy in BGP where an AS tries to **get a packet out of its network as quickly as possible** by choosing the nearest gateway.
+
+56. **What is a "Static Routing Algorithm"?**
+An algorithm where routes change **very slowly**, usually through manual configuration by a human operator.
+
+57. **Define "Address Aggregation."**
+The ability to use a **single prefix** to advertise routes to multiple physical sub-networks.
+
+58. **What is "Tunneling" in the context of IPv6?**
+It is the process of **encapsulating an IPv6 datagram inside an IPv4 datagram** so it can pass through IPv4 routers.
+
+59. **What is the "Next-Hop" attribute in BGP?**
+It is the **IP address of the router** that is the first hop on a BGP route outside the current AS.
+
+60. **Define "Link-State Broadcast."**
+The mechanism by which each node **broadcasts its link costs** to all other nodes in the network.
+
+---
+
+### **Unit IV: Transport and Application Layers**
+
+61. **What are the two primary transport protocols in the Internet?**
+They are **TCP (Transmission Control Protocol)** and **UDP (User Datagram Protocol)**.
+
+62. **How does TCP provide "Reliable Data Transfer"?**
+TCP uses **checksums, sequence numbers, acknowledgments (ACKs), and timers** to ensure a reliable byte stream.
+
+63. **What is the "Three-Way Handshake" in TCP?**
+It is the process (SYN $\rightarrow$ SYN-ACK $\rightarrow$ ACK) used to **synchronize sequence numbers** and establish a connection.
+
+64. **Explain "Slow Start" in TCP.**
+A congestion control phase where the sender **begins with a small congestion window** and doubles it every RTT until a threshold is reached.
+
+65. **What is "Silly Window Syndrome"?**
+A performance issue where data is exchanged in **very small segments**, causing high overhead.
+
+66. **Define "UDP."**
+UDP is a **connectionless, "no-frills"** transport protocol that provides process-to-process delivery with no reliability or flow control.
+
+67. **What is a "Socket"?**
+A **socket** is the software interface (API) between an application process and the transport layer protocol.
+
+68. **What is "HTTP"?**
+The **Hypertext Transfer Protocol** is the request-response protocol used for the World Wide Web.
+
+69. **Explain "DNS."**
+The **Domain Name System** is a directory service that **translates human-friendly hostnames** into numerical IP addresses.
+
+70. **How does "FTP" handle data and control?**
+FTP uses **two parallel TCP connections**: one on port 21 for control commands and another on port 20 for the actual data transfer.
+
+71. **What is "RTCP"?**
+The **RTP Control Protocol** provides feedback on the **quality of data distribution** and information about the source in a session.
+
+72. **Define "SIP."**
+The **Session Initiation Protocol** is an application-layer protocol for **setting up and managing real-time sessions** like VoIP.
+
+73. **What is "Fast Retransmit" in TCP?**
+A mechanism where a sender **retransmits a segment immediately** after receiving three duplicate ACKs, before the timer expires.
+
+74. **Differentiate between "Non-persistent" and "Persistent" HTTP.**
+Non-persistent HTTP sends each object over a **new TCP connection**, while persistent HTTP sends multiple objects over a **single connection**.
+
+75. **What is "Flow Control" in TCP?**
+It is a **speed-matching service** where the receiver tells the sender how much buffer space is available using a "receive window".
+
+76. **Explain "Piggybacking."**
+A technique where an **acknowledgment is included in a data frame** being sent in the opposite direction.
+
+77. **What are "Well-known Ports"?**
+Ports (0–1023) reserved for **standardized application services** like HTTP (80) or SMTP (25).
+
+78. **What is "MIME"?**
+**Multi-Purpose Internet Mail Extensions** allow SMTP to carry **non-textual data** like images and attachments by defining new content types.
+
+79. **What is "DASH"?**
+**Dynamic Adaptive Streaming over HTTP** allows a client to **dynamically request different quality levels** of video based on current bandwidth.
+
+80. **What is "Cumulative Acknowledgment"?**
+An ACK that confirms the receipt of **all bytes up to the indicated sequence number**.
+
+---
+
+### **Unit V: Network Monitoring and Management**
+
+81. **What is the goal of "Network Management"?**
+It involves monitoring, testing, configuring, and controlling network resources to **meet performance and QoS requirements**.
+
+82. **Define "SNMP."**
+The **Simple Network Management Protocol** is the standard for exchanging management information between a managing station and agents.
+
+83. **What is a "Management Information Base" (MIB)?**
+A MIB is a **collection of managed objects** at an agent that a management station can query or set.
+
+84. **Explain an "SNMP Trap."**
+An **unsolicited message** sent by an agent to a manager to notify it of an exceptional event like a link failure.
+
+85. **What is "Software Defined Networking" (SDN)?**
+SDN is an architecture that **separates the data plane** (forwarding) **from the control plane** (routing logic).
+
+86. **What is a "Flow Table" in SDN?**
+A table in an SDN switch that contains **match-plus-action rules** distributed by a logically centralized controller.
+
+87. **Define "Wireshark."**
+An open-source **packet sniffer and protocol analyzer** used to capture and examine network traffic in real time.
+
+88. **What is "nmap"?**
+A public-domain **port-scanning tool** used to discover open ports and running applications on a network.
+
+89. **What is "Abstract Syntax Notation One" (ASN.1)?**
+A formal language used to **describe data structures** in a machine-independent way, used in the SMI for MIBs.
+
+90. **What are "Middleboxes"?**
+Intermediate boxes (like NATs or firewalls) that perform **functions other than standard IP routing** on the data path.
+
+91. **What is "Network Provisioning"?**
+The process of **configuring and activating** network services for users.
+
+92. **Explain "Fault Isolation."**
+The process of **locating and identifying** a specific point of failure in a network to repair it.
+
+93. **What is the "Northbound API" in an SDN controller?**
+The interface that allows **network-control applications** to communicate with the SDN controller.
+
+94. **What is "Load Balancing"?**
+A service that **distributes requests across multiple servers** to optimize resource use and response time [1030, 31.2].
+
+95. **What is "Network Function Virtualization" (NFV)?**
+The practice of implementing **middlebox functions in software** running on commodity hardware rather than dedicated boxes.
+
+96. **Define "Service Level Agreement" (SLA).**
+A **formal contract** between a service provider and a customer specifying the expected level of network performance.
+
+97. **What is "POI" (Point of Interconnect)?**
+A location where **multiple ISPs peer together** or exchange traffic (often called an IXP).
+
+98. **Explain the "SMI" (Structure of Management Information).**
+The language used to **define the syntax and semantics** of MIB data to ensure interoperability.
+
+99. **What is "Traffic Conditioning"?**
+The functions of **metering, marking, shaping, and dropping** used to enforce a service level profile.
+
+100. **Why is the "Logically Centralized" control plane used in SDN?**
+It allows for a **global view of the network**, making it easier to implement complex management tasks like traffic engineering.

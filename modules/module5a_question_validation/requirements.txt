@@ -1,0 +1,8 @@
+# Module 5A: Question Validation Dependencies
+spacy>=3.4.0
+textblob>=0.17.1
+sentence-transformers>=2.2.0
+numpy>=1.21.0
+
+# Download spaCy model:
+# python -m spacy download en_core_web_sm
