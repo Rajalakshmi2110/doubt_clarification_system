@@ -16,13 +16,30 @@ class QuestionValidator:
         self.nlp = spacy.load("en_core_web_sm")
         self.sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
         
-        # Computer Networks syllabus keywords
+        # Computer Networks syllabus keywords with layer mapping
         self.syllabus_keywords = {
             "unit1": ["network", "protocol", "osi", "tcp/ip", "data communication", "transmission"],
             "unit2": ["physical layer", "data link", "ethernet", "frame", "error detection", "flow control"],
             "unit3": ["network layer", "routing", "ip", "subnet", "nat", "dhcp", "icmp"],
             "unit4": ["transport layer", "tcp", "udp", "socket", "port", "congestion control"],
             "unit5": ["application layer", "http", "dns", "ftp", "smtp", "snmp"]
+        }
+        
+        # Protocol-to-layer mapping for technical validation
+        self.protocol_layers = {
+            "http": "application layer",
+            "https": "application layer", 
+            "ftp": "application layer",
+            "smtp": "application layer",
+            "dns": "application layer",
+            "snmp": "application layer",
+            "tcp": "transport layer",
+            "udp": "transport layer",
+            "ip": "network layer",
+            "icmp": "network layer",
+            "dhcp": "network layer",
+            "ethernet": "data link layer",
+            "arp": "data link layer"
         }
         
         # Flatten keywords for relevance checking
@@ -88,6 +105,45 @@ class QuestionValidator:
             return False, "Question appears to be gibberish (too many very short words)"
         
         return True, "Question is semantically valid"
+    
+    def check_technical_accuracy(self, question: str) -> Tuple[bool, str]:
+        """Step 4: Check for obvious technical inaccuracies"""
+        question_lower = question.lower()
+        
+        # Check for protocol-layer mismatches
+        for protocol, correct_layer in self.protocol_layers.items():
+            if protocol in question_lower:
+                # Check if question mentions wrong layer
+                for layer in ["physical layer", "data link layer", "network layer", "transport layer", "application layer"]:
+                    if layer in question_lower and layer != correct_layer:
+                        return False, f"Technical error: {protocol.upper()} operates at {correct_layer}, not {layer}"
+        
+        # Check for common misconceptions
+        misconceptions = [
+            (["http", "transport"], "HTTP operates at application layer, not transport layer"),
+            (["tcp", "application"], "TCP operates at transport layer, not application layer"),
+            (["ip", "transport"], "IP operates at network layer, not transport layer"),
+            (["ethernet", "network"], "Ethernet operates at data link layer, not network layer")
+        ]
+        
+        for keywords, error_msg in misconceptions:
+            if all(keyword in question_lower for keyword in keywords):
+                return False, f"Technical error: {error_msg}"
+        
+        # Check for cross-layer conceptual errors
+        cross_layer_errors = [
+            (["tcp", "mac"], "TCP operates at transport layer and doesn't handle MAC addresses (data link layer)"),
+            (["http", "mac"], "HTTP operates at application layer and doesn't handle MAC addresses (data link layer)"),
+            (["ip", "mac"], "IP addresses and MAC addresses serve different purposes at different layers"),
+            (["tcp", "physical"], "TCP operates at transport layer, not physical layer"),
+            (["http", "routing"], "HTTP operates at application layer and doesn't handle routing (network layer function)")
+        ]
+        
+        for keywords, error_msg in cross_layer_errors:
+            if all(keyword in question_lower for keyword in keywords):
+                return False, f"Conceptual error: {error_msg}"
+        
+        return True, "No technical errors detected"
     
     def check_syllabus_relevance(self, question: str) -> Tuple[bool, str, float]:
         """Step 3: Check if question is relevant to Computer Networks syllabus"""
@@ -157,7 +213,18 @@ class QuestionValidator:
             result["final_message"] = f"Invalid question: {sanity_message}"
             return result
         
-        # Step 3: Syllabus relevance check
+        # Step 3: Technical accuracy check
+        is_accurate, accuracy_message = self.check_technical_accuracy(corrected_question)
+        result["validation_steps"]["technical_accuracy"] = {
+            "passed": is_accurate,
+            "message": accuracy_message
+        }
+        
+        if not is_accurate:
+            result["final_message"] = f"Technically incorrect: {accuracy_message}"
+            return result
+        
+        # Step 4: Syllabus relevance check
         is_relevant, relevance_message, relevance_score = self.check_syllabus_relevance(corrected_question)
         result["validation_steps"]["syllabus_relevance"] = {
             "passed": is_relevant,
