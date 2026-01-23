@@ -1,0 +1,9 @@
+{
+  "dataset_path": "data/dataset/maximum_questions.json",
+  "total_questions": 113,
+  "sources": [
+    "cleaned_questions.json",
+    "sampleQA.txt",
+    "sample_q.txt"
+  ]
+}

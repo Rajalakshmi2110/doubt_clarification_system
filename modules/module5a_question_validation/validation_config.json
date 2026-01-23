@@ -101,7 +101,7 @@
     "unit4": {
       "title": "Transport Layer",
       "description": "Transport layer services, TCP and UDP protocols, socket programming, port numbers, and congestion control",
-      "keywords": ["transport layer", "tcp", "udp", "socket", "port", "congestion control"]
+      "keywords": ["transport layer", "tcp", "udp", "socket", "port", "congestion control", "handshake", "connection", "reliable", "unreliable"]
     },
     "unit5": {
       "title": "Application Layer",

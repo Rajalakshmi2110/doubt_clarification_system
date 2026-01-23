@@ -1,88 +1,129 @@
 """
-Module 3: Context-Aware Supervised Training Dataset Generation
-Creates MCP-style training data by augmenting Q&A pairs with retrieved textbook context.
+Module 3: Complete Dataset Generation Pipeline
+Handles dataset expansion and MCP format generation
 """
 
 import json
+import re
 import pickle
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
 from sklearn.model_selection import train_test_split
 import os
-from typing import List, Dict, Tuple
+from pathlib import Path
+from typing import List, Dict
 
 class MCPDatasetGenerator:
     def __init__(self, config_path: str = "config.json"):
-        """Initialize MCP dataset generator with configuration."""
+        """Initialize with auto dataset expansion"""
         with open(config_path, 'r') as f:
             self.config = json.load(f)
         
-        # Load SBERT model (same as Module 2)
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
-        
-        # Paths
         self.faiss_index_path = "data/processed/textbook_faiss.index"
         self.metadata_path = "data/processed/textbook_metadata.pkl"
-        self.qa_dataset_path = "data/dataset/cleaned_questions.json"
         
-        # Load FAISS index and metadata with checks
-        from pathlib import Path
-        if not Path(self.faiss_index_path).exists():
-            raise FileNotFoundError(
-                f"FAISS index not found at {self.faiss_index_path}. Build the index first (Module 2)."
-            )
-        if not Path(self.metadata_path).exists():
-            raise FileNotFoundError(
-                f"Metadata file not found at {self.metadata_path}. Build the index first (Module 2)."
-            )
+        # Auto-expand dataset first
+        self.qa_dataset_path = self._expand_and_get_dataset()
+        self._load_faiss_index()
+    
+    def _expand_and_get_dataset(self):
+        """Auto-expand dataset from all sources"""
+        
+        # Load existing dataset
+        with open("data/dataset/cleaned_questions.json", "r", encoding="utf-8") as f:
+            existing_data = json.load(f)
+        
+        # Parse sampleQA.txt for additional questions
+        sampleqa_path = Path("data/dataset/sampleQA.txt")
+        if sampleqa_path.exists():
+            with open(sampleqa_path, "r", encoding="utf-8") as f:
+                content = f.read()
+            
+            # Extract Q&A pairs
+            pattern = r'(\d+)\.\s*\*\*([^*]+?)\*\*\s*(.*?)(?=\d+\.\s*\*\*|---|\n###|$)'
+            matches = re.findall(pattern, content, re.DOTALL)
+            
+            new_data = []
+            for num, question, answer in matches:
+                clean_question = question.strip()
+                clean_answer = answer.strip().replace('\n', ' ').replace('  ', ' ')
+                
+                if len(clean_question) > 10 and len(clean_answer) > 20:
+                    new_data.append({
+                        "id": int(num),
+                        "question": clean_question,
+                        "answer": clean_answer,
+                        "topic": "Computer Networks",
+                        "difficulty": "medium"
+                    })
+            
+            # Combine without duplicates
+            existing_questions = {q["question"].lower().strip() for q in existing_data}
+            combined_data = existing_data.copy()
+            added_count = 0
+            
+            for item in new_data:
+                question_key = item["question"].lower().strip()
+                is_duplicate = any(
+                    question_key == existing_q or question_key in existing_q or existing_q in question_key
+                    for existing_q in existing_questions
+                )
+                
+                if not is_duplicate and len(question_key) > 15:
+                    item["id"] = len(combined_data) + 1
+                    combined_data.append(item)
+                    existing_questions.add(question_key)
+                    added_count += 1
+            
+            # Save expanded dataset
+            output_path = "data/dataset/auto_expanded_questions.json"
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(combined_data, f, indent=2, ensure_ascii=False)
+            
+            print(f"✅ Auto-expanded dataset: {len(existing_data)} → {len(combined_data)} questions")
+            return output_path
+        
+        else:
+            print(f"📝 Using original dataset: {len(existing_data)} questions")
+            return "data/dataset/cleaned_questions.json"
+    
+    def _load_faiss_index(self):
+        """Load FAISS index and metadata"""
         try:
             self.index = faiss.read_index(self.faiss_index_path)
-        except Exception as e:
-            raise RuntimeError(f"Failed to read FAISS index at {self.faiss_index_path}: {e}")
-        try:
             with open(self.metadata_path, 'rb') as f:
                 self.metadata = pickle.load(f)
+            print(f"✅ Loaded FAISS index with {self.index.ntotal} chunks")
         except Exception as e:
-            raise RuntimeError(f"Failed to load metadata from {self.metadata_path}: {e}")
-        
-        print(f"Loaded FAISS index with {self.index.ntotal} textbook chunks")
+            raise RuntimeError(f"Failed to load FAISS index: {e}")
     
     def retrieve_context(self, question: str, k: int = 4) -> List[Dict]:
         """Retrieve top-k relevant textbook chunks for a question."""
-        # Encode question using same model as indexing
         question_embedding = self.model.encode([question])
-        
-        # Normalize for cosine similarity (same as indexing)
-        import faiss
         faiss.normalize_L2(question_embedding.astype('float32'))
         
-        # Search FAISS index
         scores, indices = self.index.search(question_embedding.astype('float32'), k)
         
-        # Get retrieved chunks with metadata
         retrieved_chunks = []
         for i, (score, idx) in enumerate(zip(scores[0], indices[0])):
-            if idx != -1 and idx < len(self.metadata):  # Valid index
+            if idx != -1 and idx < len(self.metadata):
                 chunk_data = self.metadata[idx]
-                # Determine source file based on index position (approximation)
-                source_file = "primary_textbook" if idx < 2700 else "secondary_textbook"
                 retrieved_chunks.append({
                     'text': chunk_data['text'],
                     'score': float(score),
-                    'source_file': source_file,
+                    'source_file': f"textbook_chunk_{idx}",
                     'chunk_id': f"chunk_{idx}",
-                    'unit': 'textbook_content'
+                    'unit': chunk_data.get('unit', 'textbook_content')
                 })
         
         return retrieved_chunks
     
     def create_mcp_input(self, question: str, context_chunks: List[Dict]) -> str:
         """Create MCP-style input format."""
-        # Concatenate retrieved context
         context_text = "\n\n".join([chunk['text'] for chunk in context_chunks])
         
-        # MCP format
         mcp_input = f"""[QUESTION]
 {question}
 
@@ -171,7 +212,9 @@ Answer the question academically using only the given context."""
             'test_examples': len(test_data),
             'split_ratio': '80:10:10',
             'retrieval_k': 4,
-            'model_used': 'all-MiniLM-L6-v2'
+            'model_used': 'all-MiniLM-L6-v2',
+            'dataset_source': self.qa_dataset_path,
+            'improvement': f"{len(dataset)} vs 48 original"
         }
         
         with open(f"{output_dir}/mcp_dataset_summary.json", 'w') as f:
