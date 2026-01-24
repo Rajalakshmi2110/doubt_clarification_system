@@ -1,0 +1,200 @@
+1. Compare the functionality of a hub and a switch in relation to collision domains and specify their influence on overall network performance.
+2. Consider a stream of binary data consisting of a long sequence of 1s followed by a zero followed by a long string of 1s. Draw the waveform for Bipolar - AMI and Pseudoternary schemes.
+3. State the reason for the reduced number of layers in TCP/IP model comparing with OSI model.
+4. Represent the digital data 001101000010 as modulated BFSK and BPSK waveforms.
+5. What is the main difference between fiber optic cables and twisted pair cables in terms of data transmission?
+6. A channel has a data rate of 4 kbps and a propagation delay of 20ms. For what range of frame sizes does stop and wait give an efficiency of at least 50%?
+7. Given message is M (X) = X5 + X4+X+ 1 and the generator is G(X) X4+X3+1. Compute CRC.
+8. Why IEEE 802.11 frame uses 4 address fields?
+9. Why CSMA/CD is not suitable for Ad hoc networks?
+10. A Class C network 192.168.1.0 is sub-netted with a subnet mask of 255.255.255.240. List the number of networks and the number of hosts per network.
+11. Why IPv6 header size is not increased proportionately with the rate of increase of its address bits compared with IPv4?
+12. What are the application and transport layer protocols involved when an e-mail containing text and image is sent from host A to host B?
+13. State the functionality of UDP at the receiver host.
+14. How TCP ensures reliability with an unreliable lower layer service?
+15. Why the Transport layer and Network layer cannot be combined as a single layer?
+16. State the significant difference in the operations of a Switch and Bridge.
+17. If the RTT from sender to the receiver is 120ms and all links in the network have a 155 Mbps, how many bytes of data can fit in the "pipe"?
+18. What are the advantages of doing reassembly at the ultimate destination instead of doing it after the datagram travels across the network?
+19. Which is the network address to which packets with the following IP address will be sent: i) 127.29.12.78 ii) 159.78.9.10 iii) 192.20.10.11 iv) 230.23.88.99
+20. Specify the need for providing similar services in data link and transport layer.
+21. Why FTP uses 2 port numbers?
+22. State the significance of SMI in network management.
+23. Compare traditional switch with SDN enabled switch in terms of handling forwarding decisions.
+24. Why CSMA/CD is not appropriate for full-duplex Ethernet environment?
+25. Differentiate between Router and Gateway.
+26. If the packet has to go through 3 routers, how many times will encapsulation and decapsulation take place?
+27. List out any three issues in the data link layer.
+28. Draw the IEEE 802.3 frame format.
+29. Differentiate between ARP and DHCP protocol.
+30. Indicate the Class/type of the following IP addresses: a) 134.53.0.0 b) 1.78.9.23
+31. How TCP provide reliable data delivery? Justify your answer.
+32. Describe the various part of HTTP.
+33. List out some open source network monitoring tools.
+34. Mention few points about Software Defined Network.
+35. List any two applications that you use on daily basis that requires very high bandwidth from the network?
+36. If the packet has to go through 2 routers, how many times will encapsulation and decapsulation take place?
+37. Differentiate between a modem, a switch and a router.
+38. Data is sent in 1000-byte segments over a fiber line with a distance of 10000km. link bandwidth is 2Gbps. An ACK packet of 100 bytes is returned. Calculate the RTT. How many data segments should be sent in an RTT to obtain 100% utilization of bandwidth.
+39. Mention about the following HTTP Status Response codes 200, 301, 400, 401, 505.
+40. How the 3-way handshaking process is differ from 2-way, connection establishment in TCP?
+41. Show the TCP connections that will have to be established to download 4 files between an FTP client and an FTP server.
+42. Why RCC of Anna university getting your MAC address instead of IP Address in Wi-Fi registration Form?
+43. What is silly window syndrome in TCP?
+44. Differentiate between circuit switching and packet switching.
+45. Indicate the class / type of the following IP addresses: a) 220.24.88.99 b) 6.75.10.68
+46. Suppose hosts A and B are assigned the same IP address on the Ethernet, on which ARP is used, B starts up after A. What will happen?
+47. Mention the salient features of IPv6.
+48. List out any three issues in the data link layer.49. Functionality of a Hub vs. a Switch regarding Collision Domains and Performance
+50. Waveforms for Bipolar-AMI and Pseudoternary (Sequence: 111...0...111)
+51. Reduced Number of Layers in TCP/IP vs. OSI Model
+52. Modulated BFSK and BPSK Waveforms (Data: 001101000010)
+53. Main Difference: Fiber Optic vs. Twisted Pair
+54. Stop-and-Wait Efficiency Calculation
+55. $0.5 \le 1 / (1 + 2a) \implies 1 + 2a \le 2 \implies 2a \le 1 \implies a \le 0.5$.
+56. CRC Computation
+57. Why IEEE 802.11 Frame uses 4 Address Fields
+58. Why CSMA/CD is Unsuitable for Ad Hoc Networks
+59. Subnetting a Class C Network (192.168.1.0 with 255.255.255.240)
+60. 255.255.0 (/24).
+61. IPv6 Header Size vs. Address Bits
+62. Protocols for E-mail with Text and Images
+63. Receiver-Host Functionality of UDP
+64. TCP Reliability Mechanisms
+65. Separating Transport and Network Layers
+66. Switch vs. Bridge Operations
+67. Data in the "Pipe" Calculation
+68. Advantages of Destination-Only Reassembly
+69. Network Addresses for Specific IPs
+70. Similar Services in Data Link and Transport Layers
+71. Why FTP uses 2 port numbers?
+72. State the significance of SMI in network management.
+73. Compare traditional switch with SDN enabled switch in terms of handling forwarding decisions.
+74. Why CSMA/CD is not appropriate for full-duplex Ethernet environment?
+75. Differentiate between Router and Gateway.
+76. Differentiate between Router and Gateway
+77. Encapsulation and Decapsulation through 3 Routers
+78. Issues in the Data Link Layer
+79. IEEE 802.3 Frame Format
+80. Differentiate between ARP and DHCP Protocol
+81. Class/Type of IP Addresses
+82. How TCP Provides Reliable Data Delivery
+83. Various Parts of HTTP
+84. Open Source Network Monitoring Tools
+85. Software Defined Network (SDN)
+86. Two high-bandwidth applications
+87. Encapsulation and decapsulation through 2 routers
+88. Differentiate between a modem, a switch, and a router
+89. RTT and Bandwidth Utilization Calculation
+90. HTTP Status Response Codes
+91. 3-way vs. 2-way Handshaking in TCP
+92. TCP connections for downloading 4 files via FTP
+93. MAC address vs. IP address for registration
+94. Silly Window Syndrome (SWS)
+95. Differentiate between circuit switching and packet switching
+96. Class/Type of Specific IP Addresses
+97. Duplicate IP Address Startup Scenario (Host A and B)
+98. Salient Features of IPv6
+99. Three Issues in the Data Link Layer
+100. 5. Main Difference: Fiber Optic vs. Twisted Pair
+101. Four separate data connections
+102. What are the primary components of a data communication system?
+103. What is the function of the transmitter in a communications model?
+104. Differentiate between a host and an end system.
+105. How does a switch differ from a hub regarding collision domains?
+106. Define the role of a gateway in an internetwork.
+107. What is the "network core"?
+108. Compare the OSI and TCP/IP protocol architectures.
+109. What are the key elements of a protocol?
+110. What is encapsulation in networking?
+111. Define a "switched communications network."
+112. What is the purpose of the "Internet Layer" in TCP/IP?
+113. Define a "Broadcast Network."
+114. What are "Trunks" in a public telecommunications network?
+115. What is the primary function of the "Physical Layer"?
+116. Explain the term "Address Scope."
+117. What is "Upward Multiplexing"?
+118. What is a "Router"?
+119. Why is the "Best-Effort" service model used in the IP layer?
+120. What are the three agents involved in communication?
+121. Define "Peer Layers."
+122. What is the main advantage of optical fiber over twisted pair?
+123. What are the two varieties of twisted pair cable?
+124. Define "Forward Error Correction" (FEC).
+125. How does a "Cyclic Redundancy Check" (CRC) work?
+126. What is the "Hidden Terminal Problem"?
+127. What is the function of the "MAC" sublayer?
+128. How does "Sliding-Window" flow control work?
+129. Define "Bit Stuffing."
+130. What is the "Binary Exponential Backoff" algorithm?
+131. What is a "VLAN"?
+132. Explain "CSMA/CA."
+133. What is "Bluetooth"?
+134. What are the issues addressed by the Data Link Layer?
+135. What is "Propagation Delay"?
+136. Explain the "Stop-and-Wait" protocol.
+137. What are "Collision Domains"?
+138. What is the "Preamble" in an Ethernet frame?
+139. Define "Bipolar-AMI."
+140. What is a "Modem"?
+141. How does "Differential Manchester" encoding work?
+142. What is the difference between "Routing" and "Forwarding"?
+143. Explain "Distance-Vector Routing."
+144. Define "Link-State Routing."
+145. What is the "Bellman-Ford Equation"?
+146. Define "Autonomous System" (AS).
+147. What is the role of "BGP"?
+148. What is "CIDR"?
+149. Explain "Subnetting."
+150. What does "DHCP" provide?
+151. Define "NAT."
+152. What is "ICMP"?
+153. Why was IPv6 developed?
+154. What is "IP-Anycast"?
+155. What is the "Count-to-Infinity" problem?
+156. Explain "Hot Potato Routing."
+157. What is a "Static Routing Algorithm"?
+158. Define "Address Aggregation."
+159. What is "Tunneling" in the context of IPv6?
+160. What is the "Next-Hop" attribute in BGP?
+161. Define "Link-State Broadcast."
+162. What are the two primary transport protocols in the Internet?
+163. How does TCP provide "Reliable Data Transfer"?
+164. What is the "Three-Way Handshake" in TCP?
+165. Explain "Slow Start" in TCP.
+166. What is "Silly Window Syndrome"?
+167. Define "UDP."
+168. What is a "Socket"?
+169. What is "HTTP"?
+170. Explain "DNS."
+171. How does "FTP" handle data and control?
+172. What is "RTCP"?
+173. Define "SIP."
+174. What is "Fast Retransmit" in TCP?
+175. Differentiate between "Non-persistent" and "Persistent" HTTP.
+176. What is "Flow Control" in TCP?
+177. Explain "Piggybacking."
+178. What are "Well-known Ports"?
+179. What is "MIME"?
+180. What is "DASH"?
+181. What is "Cumulative Acknowledgment"?
+182. What is the goal of "Network Management"?
+183. Define "SNMP."
+184. What is a "Management Information Base" (MIB)?
+185. Explain an "SNMP Trap."
+186. What is "Software Defined Networking" (SDN)?
+187. What is a "Flow Table" in SDN?
+188. Define "Wireshark."
+189. What is "nmap"?
+190. What is "Abstract Syntax Notation One" (ASN.1)?
+191. What are "Middleboxes"?
+192. What is "Network Provisioning"?
+193. Explain "Fault Isolation."
+194. What is the "Northbound API" in an SDN controller?
+195. What is "Load Balancing"?
+196. What is "Network Function Virtualization" (NFV)?
+197. Define "Service Level Agreement" (SLA).
+198. What is "POI" (Point of Interconnect)?
+199. Explain the "SMI" (Structure of Management Information).
+200. What is "Traffic Conditioning"?
+201. Why is the "Logically Centralized" control plane used in SDN?

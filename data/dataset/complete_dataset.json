@@ -1,0 +1,1402 @@
+[
+  {
+    "id": 1,
+    "question": "Compare the functionality of a hub and a switch in relation to collision domains and specify their influence on overall network performance.",
+    "answer": "Hub Functionality: A hub is a physical-layer device that acts on individual bits rather than frames. When a bit arrives from one interface, the hub simply re-creates and transmits that bit onto all other interfaces, creating a single broadcast LAN where only one station can successfully transmit at a time. If two stations transmit simultaneously, a collision occurs, and the nodes must retransmit using CSMA/CD. Switch Functionality: A switch is a link-layer (layer 2) device that switches incoming frames to specific output lines based on the destination MAC address. Unlike a hub, a switch is collision-less; it buffers frames and never transmits more than one frame on a segment at any time, effectively creating separate collision domains for each connected station. Influence on Performance: In a hub-based network, all stations share the total capacity of the medium (e.g., 10 Mbps). In a switched LAN, each station can enjoy a dedicated capacity equal to the original LAN speed, allowing for a much higher aggregate throughput (the sum of all interface rates).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 2,
+    "question": "Consider a stream of binary data consisting of a long sequence of 1s followed by a zero followed by a long string of 1s. Draw the waveform for Bipolar - AMI and Pseudoternary schemes.",
+    "answer": "Bipolar-AMI: Binary 0 is represented by no line signal, while binary 1 is represented by positive or negative pulses that must alternate in polarity. Waveform Description: The initial string of 1s will appear as alternating positive and negative voltage pulses (e.g., +V, -V, +V...). The 0 will be a flat line at zero volts. The following string of 1s will resume alternating pulses starting with the opposite polarity of the last 1-pulse before the zero. Pseudoternary: Binary 1 is represented by no line signal, while binary 0 is represented by alternating positive and negative pulses. Waveform Description: The long sequences of 1s will be a flat line at zero volts. The single 0 will be a single voltage pulse (either positive or negative). The subsequent string of 1s will again be a flat line at zero volts.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 3,
+    "question": "State the reason for the reduced number of layers in TCP/IP model comparing with OSI model.",
+    "answer": "The TCP/IP protocol suite consists of five layers: physical, network access, internet, transport, and application. The primary reason for the reduced number of layers is that the OSI model is considered unnecessarily complex, featuring seven layers to accomplish the same tasks that TCP/IP handles with fewer. TCP/IP protocols were also more mature and well-tested by the time similar OSI protocols were still in development.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 4,
+    "question": "Represent the digital data 001101000010 as modulated BFSK and BPSK waveforms.",
+    "answer": "Binary FSK (BFSK): Binary values are represented by two different frequencies (f1 and f2) near the carrier frequency. Waveform: The \"0\" bits (00, 0, 0000, 0) will show a lower frequency sine wave, while the \"1\" bits (11, 1, 1) will show a higher frequency sine wave. Binary PSK (BPSK): Binary values are represented by shifting the phase of the carrier signal by 180°. Waveform: A continuous sine wave will undergo a phase reversal (the wave flips) every time the bit changes from 0 to 1 or 1 to 0.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 5,
+    "question": "What is the main difference between fiber optic cables and twisted pair cables in terms of data transmission?",
+    "answer": "The main difference lies in their transmission capacity and immunity to interference. Optical fiber offers immense potential bandwidth (supporting hundreds of Gbps over tens of kilometers) and is immune to electromagnetic interference, crosstalk, and noise. Twisted pair is the least expensive and most common medium but is limited in distance, bandwidth, and data rate, and it is highly susceptible to electromagnetic interference and noise.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 6,
+    "question": "A channel has a data rate of 4 kbps and a propagation delay of 20ms. For what range of frame sizes does stop and wait give an efficiency of at least 50%?",
+    "answer": "Given: Data rate (R) = 4 kbps (4000 bps); Propagation delay (t_prop) = 20 ms (0.02 s); Efficiency (U) ≥ 50% (0.5). Formula: U = 1 / (1 + 2a), where a = t_prop / t_trans. Calculation: 0.5 ≤ 1 / (1 + 2a) ⟹ 1 + 2a ≤ 2 ⟹ 2a ≤ 1 ⟹ a ≤ 0.5. a = t_prop / t_trans ⟹ 0.02 / t_trans ≤ 0.5 ⟹ t_trans ≥ 0.04 seconds. t_trans = Frame size (L) / Rate (R) ⟹ L / 4000 ≥ 0.04 ⟹ L ≥ 160 bits. Answer: Stop-and-wait gives at least 50% efficiency for frame sizes of 160 bits or larger.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 7,
+    "question": "Given message is M (X) = X5 + X4+X+ 1 and the generator is G(X) X4+X3+1. Compute CRC.",
+    "answer": "Message M(X): X^5 + X^4 + X + 1 (Binary: 110011). Generator G(X): X^4 + X^3 + 1 (Binary: 11001). Procedure: Multiply M(X) by X^r (where r=4 is the degree of G(X)) and divide by G(X). Append four 0s to message: 1100110000. Divide 1100110000 by 11001 using modulo-2 arithmetic. 110011 / 11001 = 1 with remainder 000001. Bring down the remaining 0s: 10000. 10000 / 11001 = 0 with remainder 10000. CRC (FCS): The calculated CRC is 10000 (or X^4 in polynomial form).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 8,
+    "question": "Why IEEE 802.11 frame uses 4 address fields?",
+    "answer": "The 802.11 frame uses multiple address fields for internetworking purposes. Three fields are typically used in infrastructure mode to indicate the receiver, transmitter, and the router interface (BSS identifier). The fourth address field is specifically required when Access Points (APs) forward frames to each other while operating in ad hoc mode.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 9,
+    "question": "Why CSMA/CD is not suitable for Ad hoc networks?",
+    "answer": "CSMA/CD is not suitable for wireless ad hoc environments because collision detection is often impossible. The strength of the station's own transmitted signal at the adapter is much higher than any incoming signal, making it difficult to detect interference. Furthermore, even with detection, a station cannot sense all collisions due to the hidden terminal problem (physical obstructions) and signal fading over distance.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 10,
+    "question": "A Class C network 192.168.1.0 is sub-netted with a subnet mask of 255.255.255.240. List the number of networks and the number of hosts per network.",
+    "answer": "Default Class C Mask: 255.255.255.0 (/24). Subnet Mask 240: In binary, 240 is 11110000. Subnet Bits: There are 4 bits borrowed from the host portion for subnetting. Host Bits: There are 4 bits remaining for host identifiers. Number of Networks: 2^4 = 16 subnets. Number of Hosts per Network: 2^4 - 2 = 14 usable hosts (subtracting the network and broadcast addresses).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 11,
+    "question": "Why IPv6 header size is not increased proportionately with the rate of increase of its address bits compared with IPv4?",
+    "answer": "While IPv6 addresses are 128 bits (four times larger than the 32-bit IPv4 addresses), the IPv6 header is only 40 bytes, which is not a proportionate increase from the 20-byte IPv4 minimum. The designers achieved this by streamlining the header, reducing the number of fields from 12 in IPv4 to just 8 in IPv6. By moving optional information to extension headers and removing the header checksum to reduce processing time at each hop, the fixed-length header allows for faster processing by routers.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 12,
+    "question": "What are the application and transport layer protocols involved when an e-mail containing text and image is sent from host A to host B?",
+    "answer": "Application Layer: The Simple Mail Transfer Protocol (SMTP) is used to transfer the email between hosts. Because the email contains an image, the MIME (Multi-Purpose Internet Mail Extensions) protocol is required to wrap the non-textual data into a format that SMTP can handle. Transport Layer: TCP (Transmission Control Protocol) is the underlying protocol used by SMTP to ensure the reliable delivery of the mail message.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 13,
+    "question": "State the functionality of UDP at the receiver host.",
+    "answer": "At the receiver host, UDP acts as a simple demultiplexer. It uses the destination port number found in the segment header to deliver the data to the correct intermediary socket for the intended application. It also performs a checksum calculation for error detection; if the calculated checksum does not match the value in the header, the segment is typically discarded.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 14,
+    "question": "How TCP ensures reliability with an unreliable lower layer service?",
+    "answer": "TCP ensures reliable data transfer over an unreliable network layer using several coordinated mechanisms: Checksums to detect bit errors in segments. Sequence Numbers to ensure data is reassembled in the proper order and to detect duplicates. Acknowledgments (ACKs) and Timers; if a sender does not receive an ACK before the timer expires, it retransmits the data. Flow and Congestion Control to regulate the rate of data transmission to prevent overwhelming the receiver or the network.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 15,
+    "question": "Why the Transport layer and Network layer cannot be combined as a single layer?",
+    "answer": "The Transport and Network layers cannot be combined because they have different scopes of communication. The network layer provides host-to-host logical communication (connecting two machines), while the transport layer provides process-to-process logical communication (connecting specific applications running on those machines). This separation allows the transport layer to provide a reliable service even when the underlying network layer is unreliable.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 16,
+    "question": "State the significant difference in the operations of a Switch and Bridge.",
+    "answer": "The significant difference lies in performance and implementation. A bridge is typically a two-port device that handles frame processing in software, whereas a layer 2 switch handles address recognition and frame forwarding in hardware. Furthermore, a bridge usually analyzes one frame at a time, while a switch has multiple parallel data paths to handle many frames simultaneously.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 17,
+    "question": "If the RTT from sender to the receiver is 120ms and all links in the network have a 155 Mbps, how many bytes of data can fit in the \"pipe\"?",
+    "answer": "The amount of data that fits in the \"pipe\" is determined by the bandwidth-delay product (Bandwidth × RTT). Calculation: 155 Mbps × 0.120 seconds = 18.6 million bits. Bytes: 18,600,000 / 8 = 2,325,000 bytes.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 18,
+    "question": "What are the advantages of doing reassembly at the ultimate destination instead of doing it after the datagram travels across the network?",
+    "answer": "Performing reassembly only at the ultimate destination rather than at intermediate routers has several benefits: It reduces router complexity and speeds up the forwarding process because routers do not need to store and process partial datagrams. It allows for dynamic routing, as different fragments of the same datagram can follow different paths through the network. It prevents routers from needing large buffers to hold fragments, which would risk memory exhaustion.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 19,
+    "question": "Which is the network address to which packets with the following IP address will be sent: i) 127.29.12.78 ii) 159.78.9.10 iii) 192.20.10.11 iv) 230.23.88.99",
+    "answer": "Under traditional classful addressing, the network addresses are as follows: i. 127.29.12.78: This falls in the 127.0.0.0 range, which is reserved for loopback. ii. 159.78.9.10: This is a Class B address (range 128–191). The network address is 159.78.0.0. iii. 192.20.10.11: This is a Class C address (range 192–223). The network address is 192.20.10.0. iv. 230.23.88.99: This is a Class D address, used for multicast groups, and does not have a traditional network/host split.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 20,
+    "question": "Specify the need for providing similar services in data link and transport layer.",
+    "answer": "Providing similar services (like error control) in both layers is necessary due to the end-to-end principle. While the data link layer can correct errors locally on a high-error link (like a wireless link) to improve efficiency, it is incomplete because it cannot guarantee delivery if a router between the source and destination crashes or drops a packet due to congestion. Thus, the transport layer must provide a comprehensive end-to-end check to ensure all data actually reached the final application intact.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 21,
+    "question": "Why FTP uses 2 port numbers?",
+    "answer": "The File Transfer Protocol (FTP) uses two separate TCP connections to handle different tasks efficiently. The first is a control connection used for the exchange of commands and responses, such as user identification, passwords, and file action requests. The second connection is established specifically for the actual data transfer once the transfer has been approved via the control connection. This separation allows control information to be managed independently of the raw data stream.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 22,
+    "question": "State the significance of SMI in network management.",
+    "answer": "The Structure of Management Information (SMI) is a formal data description language used to define the objects within a Management Information Base (MIB). Its primary significance is ensuring that the syntax and semantics of network management data are unambiguous and well-defined, which allows for interoperability between different management stations and agents from various vendors. It restricts MIB data to simple types, such as scalars and two-dimensional tables, to maintain simplicity and extensibility in the network management framework.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 23,
+    "question": "Compare traditional switch with SDN enabled switch in terms of handling forwarding decisions.",
+    "answer": "Traditional Switch/Router: Forwarding decisions are typically destination-based, meaning the device examines the destination IP address of an arriving packet to index a local forwarding table. The control-plane logic (routing algorithms) and the data-plane forwarding functions are implemented monolithically within each individual device. SDN Enabled Switch: Forwarding is generalized using a \"match-plus-action\" paradigm. The switch can match packets based on various header fields from multiple protocol layers (link, network, and transport layers). Crucially, the forwarding tables (flow tables) are computed and distributed by a logically centralized remote controller that is physically separate from the switching hardware.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 24,
+    "question": "Why CSMA/CD is not appropriate for full-duplex Ethernet environment?",
+    "answer": "CSMA/CD (Carrier Sense Multiple Access with Collision Detection) is designed to manage a shared broadcast medium where collisions occur when multiple stations transmit simultaneously. In a full-duplex Ethernet environment, stations are typically connected via a switch that provides dedicated capacity for both transmission and reception. Because full-duplex switches coordinate transmissions so that a switch and a node can send frames to each other at the same time without interference, there are no collisions in the channel. Consequently, the CSMA/CD algorithm—intended specifically to detect and recover from collisions—is unnecessary and no longer needed.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 25,
+    "question": "Differentiate between Router and Gateway.",
+    "answer": "A router is a network-layer (Layer 3) packet switch that determines the end-to-end paths packets take from a source to a destination by using a routing algorithm and a forwarding table. It functions by relaying data from one network to another while remaining oblivious to transport-layer connections. In contrast, a gateway is an intermediary program that acts as a protocol translator, often providing access to resources stored on non-HTTP systems (e.g., translating HTTP to FTP) or acting as a portal through network firewalls. Unlike a traditional router, a gateway receives requests as if it were the original server for the requested resource, and the client may be unaware it is communicating with one.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 26,
+    "question": "If the packet has to go through 3 routers, how many times will encapsulation and decapsulation take place?",
+    "answer": "If a packet must traverse three routers, encapsulation will take place four times and decapsulation will take place four times. The source host performs the initial encapsulation down to the link-layer frame. Each of the three routers must decapsulate the incoming link-layer frame to the network layer (IP) to examine the destination address, and then re-encapsulate the datagram into a new link-layer frame for the next hop. Finally, the destination host performs the last decapsulation of the frame up to the application-layer message.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 27,
+    "question": "List out any three issues in the data link layer.",
+    "answer": "Three primary issues addressed by the data link layer are: Framing: The process of encapsulating a network-layer datagram within a link-layer frame, including a header and trailer, before transmission. Link Access: Managing how multiple nodes share a broadcast link through a medium access control (MAC) protocol to coordinate transmissions and resolve conflicts. Error Detection and Correction: Implementing mechanisms to detect and fix bit errors caused by signal attenuation or electromagnetic noise using techniques like CRC (Cyclic Redundancy Check).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 28,
+    "question": "Draw the IEEE 802.3 frame format.",
+    "answer": "The IEEE 802.3 (Ethernet) frame consists of the following sequential fields: Preamble (7 octets): Alternating 0s and 1s to synchronize the receiver's clock. Start Frame Delimiter (SFD) (1 octet): Indicates the actual start of the frame. Destination MAC Address (6 bytes): The physical address of the receiving adapter. Source MAC Address (6 bytes): The physical address of the transmitting adapter. Length/Type (2 bytes): Indicates the length of the data field or the specific upper-layer protocol (e.g., IP). Data/LLC Data (46 to 1500 bytes): Carries the network-layer datagram; padding is added if it is less than 46 bytes. Pad (variable): Added to ensure the frame meets the minimum length requirements for collision detection. Frame Check Sequence (FCS) (4 bytes): A 32-bit CRC used by the receiver to detect bit errors in the frame.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 29,
+    "question": "Differentiate between ARP and DHCP protocol.",
+    "answer": "ARP (Address Resolution Protocol) is used to resolve an IP address to a MAC address for nodes located on the same local subnet, acting as a \"plug-and-play\" tool that builds mapping tables automatically. DHCP (Dynamic Host Configuration Protocol) is a client-server protocol that allows a newly arrived host to automatically obtain an IP address from a network server. While ARP handles local physical addressing, DHCP provides a full network configuration, including the host's IP address, subnet mask, the address of the default gateway, and the local DNS server address.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 30,
+    "question": "Indicate the Class/type of the following IP addresses: a) 134.53.0.0 b) 1.78.9.23",
+    "answer": "a. 134.53.0.0: This is a Class B address. (The range for Class B network addresses is 128 to 191 in the first octet). b. 1.78.9.23: This is a Class A address. (The range for Class A network addresses is 1 to 126 in the first octet).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 31,
+    "question": "How TCP provide reliable data delivery? Justify your answer.",
+    "answer": "TCP provides reliable data delivery by transforming the unreliable \"best-effort\" service of the IP layer into a service that ensures data is uncorrupted, without gaps, and in sequence. It justifies this reliability through several mechanisms: checksums for detecting bit errors, sequence numbers to reorder packets and detect duplicates, acknowledgments (ACKs) from the receiver to confirm successful delivery, and timers that trigger the retransmission of segments if an acknowledgment is not received within a specific timeout interval.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 32,
+    "question": "Describe the various part of HTTP.",
+    "answer": "The HTTP message structure consists of the following components: Request Line (Request) / Status Line (Response): The first line indicating the method (e.g., GET, POST) and URL for requests, or the success/error code for responses. General Header: Fields applicable to both requests and responses that do not apply to the data being transferred (e.g., Date, Connection). Request/Response Header: Specific headers containing information about the client's capabilities or the server's software. Entity Header: Metadata regarding the resource identified by the request and the entity body (e.g., Content-Type, Content-Length). Entity Body: The actual payload of the message, containing the resource data such as HTML text or binary image data.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 33,
+    "question": "List out some open source network monitoring tools.",
+    "answer": "Wireshark: A free, open-source packet sniffer and protocol analyzer that allows users to capture and examine protocol messages in real time. Nmap: A widely used public-domain port-scanning tool that can discover open ports, network applications, and operating system versions. SONiC: A Linux-based open-source initiative for networking operating systems used in large-scale environments.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 34,
+    "question": "Mention few points about Software Defined Network.",
+    "answer": "Software Defined Networking (SDN) is an architecture characterized by the separation of the data plane and the control plane. In this paradigm, the network control functions are moved external to the physical switches and implemented in a logically centralized remote controller (software). Forwarding in SDN is flow-based, allowing packet switches to match packets using values from across different protocol layers (Link, Network, and Transport) rather than just destination IP addresses. This makes the network highly programmable through control applications that can manage routing, load balancing, and firewalling by distributing flow tables to the hardware.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 35,
+    "question": "List any two applications that you use on daily basis that requires very high bandwidth from the network?",
+    "answer": "Based on the sources, two applications used on a daily basis that require very high bandwidth from the network are video streaming (such as YouTube, Netflix, and Amazon Prime) and video conferencing (such as Skype, Facetime, and Google Hangouts).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 36,
+    "question": "If the packet has to go through 2 routers, how many times will encapsulation and decapsulation take place?",
+    "answer": "If a packet must go through two routers, encapsulation will take place three times and decapsulation will take place three times. Source Host: Encapsulates the application message into a transport segment, then a network datagram, and finally a link-layer frame. Router 1: Decapsulates the frame to read the network datagram (IP), then re-encapsulates it into a new link-layer frame for the next hop. Router 2: Decapsulates the frame to read the datagram, then re-encapsulates it for the final destination. Destination Host: Performs the final decapsulation of the frame and datagram to deliver the message to the application.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 37,
+    "question": "Differentiate between a modem, a switch and a router.",
+    "answer": "Modem: A transmitter/receiver that converts digital bit streams into analog signals for transmission over analog media (like telephone lines) and converts them back into digital format at the receiving end. Switch: A link-layer device that forwards frames based on MAC addresses; it is typically used in access networks to interconnect multiple devices within a single local network. Router: A network-layer device that forwards packets based on destination IP addresses; its primary role is to determine the end-to-end paths between different networks.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 38,
+    "question": "Data is sent in 1000-byte segments over a fiber line with a distance of 10000km. link bandwidth is 2Gbps. An ACK packet of 100 bytes is returned. Calculate the RTT. How many data segments should be sent in an RTT to obtain 100% utilization of bandwidth.",
+    "answer": "Given: Data size (L) = 1000 bytes (8000 bits); distance (d) = 10,000 km (10^7 m); link bandwidth (R) = 2 Gbps (2 × 10^9 bps); ACK size = 100 bytes (800 bits). Step 1: Calculate Propagation Delay (t_prop): Using a standard propagation speed in fiber (2 × 10^8 m/s), t_prop = 10,000,000 / 200,000,000 = 0.05 seconds (50 ms). Step 2: Calculate Transmission Delays (t_trans): Data t_trans = 8000 / (2 × 10^9) = 0.000004 s (4 μs). ACK t_trans = 800 / (2 × 10^9) = 0.0000004 s (0.4 μs). Step 3: Calculate RTT: RTT = Data t_trans + t_prop + ACK t_trans + t_prop = 4μs + 50ms + 0.4μs + 50ms = 100.0044 ms. Step 4: Segments for 100% utilization: This is the bandwidth-delay product: (2 × 10^9 bps × 0.1000044 s) / 8000 bits/segment ≈ 25,001 segments.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 39,
+    "question": "Mention about the following HTTP Status Response codes 200, 301, 400, 401, 505.",
+    "answer": "200 OK: The request succeeded and information is returned in the response. 301 Moved Permanently: The requested object has been permanently moved to a new URL specified in the Location header. 400 Bad Request: A generic error indicating the server could not understand the request. 401 Unauthorized: Indicates an authentication error (required but missing or invalid). 505 HTTP Version Not Supported: The requested protocol version is not supported by the server.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 40,
+    "question": "How the 3-way handshaking process is differ from 2-way, connection establishment in TCP?",
+    "answer": "The 3-way handshake (SYN → SYN-ACK → ACK) is required to ensure that both sides have established sequence numbers and are ready to communicate, preventing problems caused by obsolete segments from previous connections. A 2-way handshake is insufficient because a delayed duplicate SYN from an old connection could arrive at a server, which would then open a half-open connection for a request that is no longer valid.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 41,
+    "question": "Show the TCP connections that will have to be established to download 4 files between an FTP client and an FTP server.",
+    "answer": "To download 4 files, 5 TCP connections must be established: One persistent control connection for the entire session to exchange commands (like user IDs and passwords). Four separate data connections, one for each individual file transfer.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 42,
+    "question": "Why RCC of Anna university getting your MAC address instead of IP Address in Wi-Fi registration Form?",
+    "answer": "Universities and carriers collect the MAC address because it is a permanent, flat identifier associated with the hardware (the \"social security number\" of the device). In contrast, IP addresses are transient and change whenever a mobile device moves to a new subnet or has its lease expire via DHCP. The MAC address allows the system to identify the specific physical device regardless of its current network location.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 43,
+    "question": "What is silly window syndrome in TCP?",
+    "answer": "Silly Window Syndrome is a phenomenon that causes extremely poor performance in TCP when data is exchanged in very small segments. It occurs if the sender transmits data in small chunks or if the receiver advertises small increments in window size (credit) after clearing its buffer, causing the overhead of the headers to become significantly larger than the actual data being transferred.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 44,
+    "question": "Differentiate between circuit switching and packet switching.",
+    "answer": "Circuit Switching: Establishes a dedicated communications path with reserved resources (bandwidth and buffers); it provides a guaranteed constant data rate and involves no queuing delay once the circuit is set up. Packet Switching: Uses resources on demand without reservation; data is sent in discrete packets that are queued at nodes, which can lead to variable delay or loss, but allows for more efficient sharing of link capacity.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 45,
+    "question": "Indicate the class / type of the following IP addresses: a) 220.24.88.99 b) 6.75.10.68",
+    "answer": "According to the traditional classful addressing scheme: a) 220.24.88.99: This is a Class C address. Class C addresses have a first octet range of 192 to 223. b) 6.75.10.68: This is a Class A address. Class A addresses have a first octet range of 1 to 126.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 46,
+    "question": "Suppose hosts A and B are assigned the same IP address on the Ethernet, on which ARP is used, B starts up after A. What will happen?",
+    "answer": "When Host B starts up after Host A with the same IP address, a conflict occurs within the ARP (Address Resolution Protocol) mechanism. Typically, a newly arriving host may send an ARP request to resolve its own IP address to ensure it is unique; if Host B does this, Host A will receive the broadcast and may respond or log an error. If an external host sends an ARP query for that shared IP, both Host A and Host B will respond with their respective (different) MAC addresses. This leads to inconsistent ARP tables in other network nodes, a situation where the \"winning\" MAC address in a remote cache depends on which response arrived last, effectively disrupting reliable communication for both hosts.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 47,
+    "question": "Mention the salient features of IPv6.",
+    "answer": "The sources identify several key enhancements in IPv6 over IPv4: Expanded Addressing: IPv6 uses 128-bit addresses (compared to 32-bit), providing an effectively inexhaustible supply of unique identifiers. Streamlined Header: It features a fixed-length 40-byte header with fewer fields (8 vs 12 in IPv4), which allows for faster processing by routers. Flow Labeling: A 20-bit field allows a source to label packets for special handling (e.g., real-time service) by routers. Improved Options Mechanism: Options are moved to extension headers located between the IP and transport headers, simplifying the main header. No Router Fragmentation: IPv6 prohibits fragmentation at intermediate routers; it must be performed by the source host, which increases forwarding efficiency. Anycast Addresses: A new type of address that allows a packet to be delivered to the \"nearest\" member of a group of functional interfaces.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 48,
+    "question": "List out any three issues in the data link layer.49. Functionality of a Hub vs. a Switch regarding Collision Domains and Performance",
+    "answer": "The data link layer must address several fundamental communication challenges: Framing: The need to encapsulate network-layer datagrams into distinct link-layer frames with recognizable boundaries. Link Access: Coordinating how multiple nodes share a broadcast medium to prevent or manage collisions. Error Control: Implementing mechanisms to detect and potentially correct bit errors introduced by signal attenuation or noise. Flow Control: Ensuring a fast sender does not overwhelm a slow receiver's buffer capacity.49. *** **Hub Functionality: **A hub is a physical-layer device that acts on individual bits rather than frames. When a bit arrives from one interface, the hub simply **re-creates and transmits that bit onto all other interfaces **, creating a single **broadcast LAN **where only one station can successfully transmit at a time. If two stations transmit simultaneously, a **collision occurs **, and the nodes must retransmit using CSMA/CD. * **Switch Functionality: **A switch is a link-layer (layer 2) device that **switches incoming frames to specific output lines **based on the destination MAC address. Unlike a hub, a switch is **collision-less **; it buffers frames and never transmits more than one frame on a segment at any time, effectively creating **separate collision domains **for each connected station. * **Influence on Performance: **In a hub-based network, all stations **share the total capacity **of the medium (e.g., 10 Mbps). In a switched LAN, each station can enjoy a **dedicated capacity **equal to the original LAN speed, allowing for a much higher **aggregate throughput **(the sum of all interface rates).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 49,
+    "question": "Waveforms for Bipolar-AMI and Pseudoternary (Sequence: 111...0...111)",
+    "answer": "*** **Bipolar-AMI: **Binary 0 is represented by **no line signal **, while binary 1 is represented by **positive or negative pulses that must alternate **in polarity.     *   *Waveform Description:* The initial string of 1s will appear as alternating positive and negative voltage pulses (e.g., +V, -V, +V...). The 0 will be a flat line at zero volts. The following string of 1s will resume alternating pulses starting with the opposite polarity of the last 1-pulse before the zero. * **Pseudoternary: **Binary 1 is represented by **no line signal **, while binary 0 is represented by **alternating positive and negative pulses **.     *   *Waveform Description:* The long sequences of 1s will be a flat line at zero volts. The single 0 will be a single voltage pulse (either positive or negative). The subsequent string of 1s will again be a flat line at zero volts.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 50,
+    "question": "Reduced Number of Layers in TCP/IP vs. OSI Model",
+    "answer": "**The TCP/IP protocol suite consists of **five layers **: physical, network access, internet, transport, and application. The primary reason for the reduced number of layers is that the **OSI model is considered unnecessarily complex **, featuring seven layers to accomplish the same tasks that TCP/IP handles with fewer. TCP/IP protocols were also more **mature and well-tested **by the time similar OSI protocols were still in development.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 51,
+    "question": "Modulated BFSK and BPSK Waveforms (Data: 001101000010)",
+    "answer": "*** **Binary FSK (BFSK): **Binary values are represented by **two different frequencies **($f_1$ and $f_2$) near the carrier frequency.     *   *Waveform:* The \"0\" bits (00, 0, 0000, 0) will show a lower frequency sine wave, while the \"1\" bits (11, 1, 1) will show a higher frequency sine wave. * **Binary PSK (BPSK): **Binary values are represented by **shifting the phase **of the carrier signal by 180°.     *   *Waveform:* A continuous sine wave will undergo a **phase reversal (the wave flips) **every time the bit changes from 0 to 1 or 1 to 0.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 52,
+    "question": "Main Difference: Fiber Optic vs. Twisted Pair",
+    "answer": "**The main difference lies in their **transmission capacity and immunity to interference **. Optical fiber offers **immense potential bandwidth **(supporting hundreds of Gbps over tens of kilometers) and is **immune to electromagnetic interference **, crosstalk, and noise. Twisted pair is the **least expensive **and most common medium but is **limited in distance, bandwidth, and data rate **, and it is highly susceptible to electromagnetic interference and noise.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 53,
+    "question": "Stop-and-Wait Efficiency Calculation",
+    "answer": "*** **Given: **Data rate ($R$) = 4 kbps (4000 bps); Propagation delay ($t_{prop}$) = 20 ms (0.02 s); Efficiency ($U$) $\\ge$ 50% (0.5). * **Formula: **$U = 1 / (1 + 2a)$, where $a = t_{prop} / t_{trans}$. * **Calculation:",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 54,
+    "question": "$0.5 \\le 1 / (1 + 2a) \\implies 1 + 2a \\le 2 \\implies 2a \\le 1 \\implies a \\le 0.5$.",
+    "answer": "2.  $a = t_{prop} / t_{trans} \\implies 0.02 / t_{trans} \\le 0.5 \\implies t_{trans} \\ge 0.04$ seconds.     3.  $t_{trans} = \\text{Frame size} (L) / \\text{Rate} (R) \\implies L / 4000 \\ge 0.04 \\implies L \\ge 160$ bits. * **Answer: **Stop-and-wait gives at least 50% efficiency for **frame sizes of 160 bits or larger **.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 55,
+    "question": "CRC Computation",
+    "answer": "*** **Message $M(X)$: **$X^5 + X^4 + X + 1$ (Binary: 110011). * **Generator $G(X)$: **$X^4 + X^3 + 1$ (Binary: 11001). * **Procedure: **Multiply $M(X)$ by $X^r$ (where $r=4$ is the degree of $G(X)$) and divide by $G(X)$.     1.  Append four 0s to message: **1100110000 **.     2.  Divide **1100110000 **by **11001 **using modulo-2 arithmetic.     3.  110011 / 11001 = 1 with remainder 000001.     4.  Bring down the remaining 0s: 10000.     5.  10000 / 11001 = 0 with remainder **10000 **. * **CRC (FCS): **The calculated CRC is **10000 **(or $X^4$ in polynomial form).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 56,
+    "question": "Why IEEE 802.11 Frame uses 4 Address Fields",
+    "answer": "**The 802.11 frame uses multiple address fields for **internetworking purposes **. Three fields are typically used in infrastructure mode to indicate the **receiver, transmitter, and the router interface (BSS identifier) **. The **fourth address field **is specifically required when Access Points (APs) **forward frames to each other **while operating in **ad hoc mode **.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 57,
+    "question": "Why CSMA/CD is Unsuitable for Ad Hoc Networks",
+    "answer": "**CSMA/CD is not suitable for wireless ad hoc environments because **collision detection is often impossible **. The strength of the station's own transmitted signal at the adapter is much higher than any incoming signal, making it difficult to detect interference. Furthermore, even with detection, a station cannot sense all collisions due to the **hidden terminal problem **(physical obstructions) and **signal fading **over distance.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 58,
+    "question": "Subnetting a Class C Network (192.168.1.0 with 255.255.255.240)",
+    "answer": "*** **Default Class C Mask:",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 59,
+    "question": "255.255.0 (/24).",
+    "answer": "* **Subnet Mask 240: **In binary, 240 is **11110000 **. * **Subnet Bits: **There are **4 bits **borrowed from the host portion for subnetting. * **Host Bits: **There are **4 bits **remaining for host identifiers. * **Number of Networks: **$2^4 =$ **16 subnets **. * **Number of Hosts per Network: **$2^4 - 2 =$ **14 usable hosts **(subtracting the network and broadcast addresses).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 60,
+    "question": "IPv6 Header Size vs. Address Bits",
+    "answer": "**While IPv6 addresses are 128 bits (four times larger than the 32-bit IPv4 addresses), the **IPv6 header is only 40 bytes **, which is not a proportionate increase from the 20-byte IPv4 minimum. The designers achieved this by **streamlining the header **, reducing the number of fields from 12 in IPv4 to just 8 in IPv6. By moving optional information to **extension headers **and removing the header checksum to reduce processing time at each hop, the fixed-length header allows for **faster processing by routers **.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 61,
+    "question": "Protocols for E-mail with Text and Images",
+    "answer": "*** **Application Layer: **The **Simple Mail Transfer Protocol (SMTP) **is used to transfer the email between hosts. Because the email contains an image, the **MIME (Multi-Purpose Internet Mail Extensions) **protocol is required to wrap the non-textual data into a format that SMTP can handle. * **Transport Layer: **TCP (Transmission Control Protocol) **is the underlying protocol used by SMTP to ensure the reliable delivery of the mail message.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 62,
+    "question": "Receiver-Host Functionality of UDP",
+    "answer": "**At the receiver host, UDP acts as a simple demultiplexer. It uses the **destination port number **found in the segment header to deliver the data to the correct intermediary **socket **for the intended application. It also performs a **checksum calculation **for error detection; if the calculated checksum does not match the value in the header, the segment is typically **discarded **.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 63,
+    "question": "TCP Reliability Mechanisms",
+    "answer": "**TCP ensures reliable data transfer over an unreliable network layer using several coordinated mechanisms: * **Checksums **to detect bit errors in segments. * **Sequence Numbers **to ensure data is reassembled in the proper order and to detect duplicates. * **Acknowledgments (ACKs) **and **Timers **; if a sender does not receive an ACK before the timer expires, it retransmits the data. * **Flow and Congestion Control **to regulate the rate of data transmission to prevent overwhelming the receiver or the network.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 64,
+    "question": "Separating Transport and Network Layers",
+    "answer": "**The Transport and Network layers cannot be combined because they have **different scopes of communication **. The network layer provides **host-to-host **logical communication (connecting two machines), while the transport layer provides **process-to-process **logical communication (connecting specific applications running on those machines). This separation allows the transport layer to provide a **reliable service **even when the underlying network layer is unreliable.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 65,
+    "question": "Switch vs. Bridge Operations",
+    "answer": "**The significant difference lies in performance and implementation. A **bridge **is typically a two-port device that handles frame processing in **software **, whereas a **layer 2 switch **handles address recognition and frame forwarding in **hardware **. Furthermore, a bridge usually analyzes one frame at a time, while a switch has **multiple parallel data paths **to handle many frames simultaneously.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 66,
+    "question": "Data in the \"Pipe\" Calculation",
+    "answer": "**The amount of data that fits in the \"pipe\" is determined by the **bandwidth-delay product **($Bandwidth \\times RTT$). * **Calculation: **$155 \\text{ Mbps} \\times 0.120 \\text{ seconds} = 18.6 \\text{ million bits}$. * **Bytes: **$18,600,000 / 8 = \\mathbf{2,325,000 \\text{ bytes}}$.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 67,
+    "question": "Advantages of Destination-Only Reassembly",
+    "answer": "**Performing reassembly only at the ultimate destination rather than at intermediate routers has several benefits: *   It **reduces router complexity **and speeds up the forwarding process because routers do not need to store and process partial datagrams. *   It **allows for dynamic routing **, as different fragments of the same datagram can follow different paths through the network. *   It prevents routers from needing **large buffers **to hold fragments, which would risk memory exhaustion.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 68,
+    "question": "Network Addresses for Specific IPs",
+    "answer": "**Under traditional classful addressing, the network addresses are as follows: * **i. 127.29.12.78: **This falls in the",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 69,
+    "question": "Similar Services in Data Link and Transport Layers",
+    "answer": "**Providing similar services (like error control) in both layers is necessary due to the **end-to-end principle **. While the data link layer can correct errors **locally **on a high-error link (like a wireless link) to improve efficiency, it is **incomplete **because it cannot guarantee delivery if a router between the source and destination crashes or drops a packet due to congestion. Thus, the transport layer must provide a **comprehensive end-to-end **check to ensure all data actually reached the final application intact.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 70,
+    "question": "Why FTP uses 2 port numbers?",
+    "answer": "**The File Transfer Protocol (FTP) uses two separate TCP connections to handle different tasks efficiently. The first is a **control connection **used for the exchange of commands and responses, such as user identification, passwords, and file action requests. The **second connection **is established specifically for the **actual data transfer **once the transfer has been approved via the control connection. This separation allows control information to be managed independently of the raw data stream.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 71,
+    "question": "State the significance of SMI in network management.",
+    "answer": "**The **Structure of Management Information (SMI) **is a formal data description language used to define the objects within a **Management Information Base (MIB) **. Its primary significance is ensuring that the **syntax and semantics **of network management data are **unambiguous and well-defined **, which allows for interoperability between different management stations and agents from various vendors. It restricts MIB data to simple types, such as scalars and two-dimensional tables, to maintain simplicity and extensibility in the network management framework.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 72,
+    "question": "Compare traditional switch with SDN enabled switch in terms of handling forwarding decisions.",
+    "answer": "*** **Traditional Switch/Router: **Forwarding decisions are typically **destination-based **, meaning the device examines the destination IP address of an arriving packet to index a local forwarding table. The control-plane logic (routing algorithms) and the data-plane forwarding functions are implemented **monolithically **within each individual device. * **SDN Enabled Switch: **Forwarding is **generalized **using a **\"match-plus-action\" **paradigm. The switch can match packets based on various header fields from multiple protocol layers (link, network, and transport layers). Crucially, the forwarding tables (flow tables) are computed and distributed by a **logically centralized remote controller **that is physically separate from the switching hardware.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 73,
+    "question": "Why CSMA/CD is not appropriate for full-duplex Ethernet environment?",
+    "answer": "**CSMA/CD (Carrier Sense Multiple Access with Collision Detection) is designed to manage a **shared broadcast medium **where collisions occur when multiple stations transmit simultaneously. In a **full-duplex Ethernet **environment, stations are typically connected via a switch that provides **dedicated capacity **for both transmission and reception. Because full-duplex switches coordinate transmissions so that a switch and a node can send frames to each other at the same time without interference, there are **no collisions **in the channel. Consequently, the CSMA/CD algorithm—intended specifically to detect and recover from collisions—is **unnecessary and no longer needed **. *** **Analogy for SDN vs. Traditional Switching: **Think of a **traditional switch **like a **driver **who has to stop at every intersection, look at a local map, and decide which way to turn based on their own knowledge. An **SDN-enabled switch **is like a **train **following tracks laid out by a **centralized dispatcher **; the train doesn't need to know the whole map, it just follows the specific \"match-plus-action\" instructions sent from the central office.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 74,
+    "question": "Differentiate between Router and Gateway.",
+    "answer": "2. If the packet has to go through 3 routers, how many times will encapsulation and decapsulation take place? 3. List out any three issues in the data link layer. 4. Draw the IEEE 802.3 frame format. 5. Differentiate between ARP and DHCP protocol. 6. Indicate the Class/type of the following IP addresses: a. 134.53.0.0 b. 1.78.9.23 7. How TCP provide reliable data delivery? Justify your 8. Describe the various part of HTTP. 9. List out some open source network monitoring tools. 10. Mention few points about Software Defined Network 11. List any two applications that you use on daily basis that requires very high bandwidth from the network? 12. If the packet has to go through 2 routers, how many times will encapsulation and decapsulation take place?  13. Differentiate between a modem, a switch and a router.  14. Data is sent in 1000-byte segments over a fiber line with a distance of 10000km. link bandwidth is 2Gbps. An ACK packet of 100 bytes is returned. Calculate the RTT. How many data segments should be sent in an RTT to obtain 100% utilization of bandwidth. 15. Mention about the following HTTP Status Response codes 200, 301, 400, 401, 505. 16. How the 3-way handshaking process is differ from 2-way, connection establishment in TCP? 17. Show the TCP connections that will have to be established to download 4 files between an FTP client and an FTP server. 18. Why RCC of Anna university getting your MAC address instead of IP Address in Wi-Fi registration Form? 19. What is silly window syndrome in TCP? 20. Differentiate between circuit switching and packet switching.  21. Indicate the class / type of the following IP addresses: a)220.24.88.99 b) 6.75.10.68 22. Suppose hosts A and B are assigned the same IP address on the Ethernet, on which ARP is used, B starts up after A. What will happen? 23. Mention the salient features of IPv6. 24. List out any three issues in the data link layer.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 75,
+    "question": "Differentiate between Router and Gateway",
+    "answer": "**A **router **is a network-layer (Layer 3) packet switch that determines the **end-to-end paths **packets take from a source to a destination by using a **routing algorithm **and a **forwarding table **. It functions by relaying data from one network to another while remaining **oblivious to transport-layer connections **. In contrast, a **gateway **is an intermediary program that acts as a **protocol translator **, often providing access to resources stored on **non-HTTP systems **(e.g., translating HTTP to FTP) or acting as a **portal through network firewalls **. Unlike a traditional router, a gateway receives requests as if it were the **original server **for the requested resource, and the client may be unaware it is communicating with one.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 76,
+    "question": "Encapsulation and Decapsulation through 3 Routers",
+    "answer": "**If a packet must traverse **three routers **, **encapsulation **will take place **four times **and **decapsulation **will take place **four times **. The source host performs the initial encapsulation down to the link-layer frame. Each of the three routers must **decapsulate **the incoming link-layer frame to the network layer (IP) to examine the destination address, and then **re-encapsulate **the datagram into a **new link-layer frame **for the next hop. Finally, the destination host performs the last decapsulation of the frame up to the application-layer message.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 77,
+    "question": "Issues in the Data Link Layer",
+    "answer": "**Three primary issues addressed by the data link layer are: * **Framing: **The process of **encapsulating a network-layer datagram **within a link-layer frame, including a header and trailer, before transmission. * **Link Access: **Managing how multiple nodes share a **broadcast link **through a medium access control (MAC) protocol to coordinate transmissions and **resolve conflicts **. * **Error Detection and Correction: **Implementing mechanisms to **detect and fix bit errors **caused by signal attenuation or electromagnetic noise using techniques like **CRC (Cyclic Redundancy Check) **.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 78,
+    "question": "IEEE 802.3 Frame Format",
+    "answer": "**The IEEE 802.3 (Ethernet) frame consists of the following sequential fields: * **Preamble (7 octets): **Alternating 0s and 1s to synchronize the receiver's clock. * **Start Frame Delimiter (SFD) (1 octet): **Indicates the actual start of the frame. * **Destination MAC Address (6 bytes): **The physical address of the receiving adapter. * **Source MAC Address (6 bytes): **The physical address of the transmitting adapter. * **Length/Type (2 bytes): **Indicates the length of the data field or the specific upper-layer protocol (e.g., IP). * **Data/LLC Data (46 to 1500 bytes): **Carries the network-layer datagram; padding is added if it is less than 46 bytes. * **Pad (variable): **Added to ensure the frame meets the **minimum length requirements **for collision detection. * **Frame Check Sequence (FCS) (4 bytes): **A **32-bit CRC **used by the receiver to detect bit errors in the frame.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 79,
+    "question": "Differentiate between ARP and DHCP Protocol",
+    "answer": "**ARP (Address Resolution Protocol) **is used to **resolve an IP address to a MAC address **for nodes located on the same local subnet, acting as a \"plug-and-play\" tool that builds mapping tables automatically. **DHCP (Dynamic Host Configuration Protocol) **is a client-server protocol that allows a newly arrived host to **automatically obtain an IP address **from a network server. While ARP handles local physical addressing, DHCP provides a full **network configuration **, including the host's IP address, subnet mask, the address of the **default gateway **, and the local **DNS server address **.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 80,
+    "question": "Class/Type of IP Addresses",
+    "answer": "*** **a. 134.53.0.0: **This is a **Class B **address. (The range for Class B network addresses is 128 to 191 in the first octet). * **b. 1.78.9.23: **This is a **Class A **address. (The range for Class A network addresses is 1 to 126 in the first octet).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 81,
+    "question": "How TCP Provides Reliable Data Delivery",
+    "answer": "**TCP provides **reliable data delivery **by transforming the unreliable \"best-effort\" service of the IP layer into a service that ensures data is **uncorrupted, without gaps, and in sequence **. It justifies this reliability through several mechanisms: **checksums **for detecting bit errors, **sequence numbers **to reorder packets and detect duplicates, **acknowledgments (ACKs) **from the receiver to confirm successful delivery, and **timers **that trigger the **retransmission **of segments if an acknowledgment is not received within a specific timeout interval.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 82,
+    "question": "Various Parts of HTTP",
+    "answer": "**The HTTP message structure consists of the following components: * **Request Line (Request) / Status Line (Response): **The first line indicating the **method (e.g., GET, POST) **and URL for requests, or the **success/error code **for responses. * **General Header: **Fields applicable to both requests and responses that do not apply to the data being transferred (e.g., Date, Connection). * **Request/Response Header: **Specific headers containing information about the **client's capabilities **or the **server's software **. * **Entity Header: **Metadata regarding the **resource **identified by the request and the **entity body **(e.g., Content-Type, Content-Length). * **Entity Body: **The actual **payload **of the message, containing the resource data such as HTML text or binary image data.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 83,
+    "question": "Open Source Network Monitoring Tools",
+    "answer": "*** **Wireshark: **A free, **open-source packet sniffer **and protocol analyzer that allows users to capture and examine protocol messages in real time. * **Nmap: **A widely used **public-domain port-scanning tool **that can discover open ports, network applications, and operating system versions. * **SONiC: **A Linux-based **open-source initiative **for networking operating systems used in large-scale environments.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 84,
+    "question": "Software Defined Network (SDN)",
+    "answer": "**Software Defined Networking (SDN) **is an architecture characterized by the **separation of the data plane and the control plane **. In this paradigm, the network control functions are moved **external to the physical switches **and implemented in a **logically centralized remote controller **(software). Forwarding in SDN is **flow-based **, allowing packet switches to match packets using values from across different protocol layers (Link, Network, and Transport) rather than just destination IP addresses. This makes the network **highly programmable **through control applications that can manage routing, load balancing, and firewalling by distributing **flow tables **to the hardware. *** **Analogy for Encapsulation: **Imagine a letter (the data) being placed inside a series of envelopes. The first envelope is for the recipient's office (Transport), the second is for their building (Network), and the third is for the delivery truck (Link). Every time the letter reaches a major sorting center (a Router), workers must open the outer truck envelope to read the building address on the inner envelope, then place it into a new truck envelope for the next leg of the trip. Only the final recipient opens every envelope to read the actual message.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 85,
+    "question": "Two high-bandwidth applications",
+    "answer": "**Based on the sources, two applications used on a daily basis that require very high bandwidth from the network are **video streaming **(such as YouTube, Netflix, and Amazon Prime) and **video conferencing **(such as Skype, Facetime, and Google Hangouts).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 86,
+    "question": "Encapsulation and decapsulation through 2 routers",
+    "answer": "**If a packet must go through two routers, **encapsulation will take place three times **and **decapsulation will take place three times **. * **Source Host: **Encapsulates the application message into a transport segment, then a network datagram, and finally a link-layer frame. * **Router 1: **Decapsulates the frame to read the network datagram (IP), then re-encapsulates it into a new link-layer frame for the next hop. * **Router 2: **Decapsulates the frame to read the datagram, then re-encapsulates it for the final destination. * **Destination Host: **Performs the final decapsulation of the frame and datagram to deliver the message to the application.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 87,
+    "question": "Differentiate between a modem, a switch, and a router",
+    "answer": "*** **Modem: **A transmitter/receiver that **converts digital bit streams into analog signals **for transmission over analog media (like telephone lines) and converts them back into digital format at the receiving end. * **Switch: **A link-layer device that **forwards frames based on MAC addresses **; it is typically used in access networks to interconnect multiple devices within a single local network. * **Router: **A network-layer device that **forwards packets based on destination IP addresses **; its primary role is to determine the end-to-end paths between different networks.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 88,
+    "question": "RTT and Bandwidth Utilization Calculation",
+    "answer": "*** **Given: **Data size ($L$) = 1000 bytes (8000 bits); distance ($d$) = 10,000 km ($10^7$ m); link bandwidth ($R$) = 2 Gbps ($2 \\times 10^9$ bps); ACK size = 100 bytes (800 bits). * **Step 1: Calculate Propagation Delay ($t_{prop}$): **Using a standard propagation speed in fiber ($2 \\times 10^8$ m/s), $t_{prop} = 10,000,000 / 200,000,000 = 0.05$ seconds (50 ms). * **Step 2: Calculate Transmission Delays ($t_{trans}$): ***   Data $t_{trans} = 8000 / (2 \\times 10^9) = 0.000004$ s ($4 \\mu s$).     *   ACK $t_{trans} = 800 / (2 \\times 10^9) = 0.0000004$ s ($0.4 \\mu s$). * **Step 3: Calculate RTT: **$RTT = \\text{Data } t_{trans} + t_{prop} + \\text{ACK } t_{trans} + t_{prop} = 4\\mu s + 50ms + 0.4\\mu s + 50ms = \\mathbf{100.0044 \\text{ ms}}$. * **Step 4: Segments for 100% utilization: **This is the bandwidth-delay product: $(2 \\times 10^9 \\text{ bps} \\times 0.1000044 \\text{ s}) / 8000 \\text{ bits/segment} \\approx \\mathbf{25,001 \\text{ segments}}$.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 89,
+    "question": "HTTP Status Response Codes",
+    "answer": "*** **200 OK: **The request succeeded and information is returned in the response. * **301 Moved Permanently: **The requested object has been permanently moved to a new URL specified in the Location header. * **400 Bad Request: **A generic error indicating the server could not understand the request. * **401 Unauthorized: **Indicates an authentication error (required but missing or invalid). * **505 HTTP Version Not Supported: **The requested protocol version is not supported by the server.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 90,
+    "question": "3-way vs. 2-way Handshaking in TCP",
+    "answer": "**The **3-way handshake **(SYN $\\rightarrow$ SYN-ACK $\\rightarrow$ ACK) is required to ensure that both sides have established sequence numbers and are ready to communicate, preventing problems caused by **obsolete segments **from previous connections. A **2-way handshake **is insufficient because a delayed duplicate SYN from an old connection could arrive at a server, which would then open a half-open connection for a request that is no longer valid.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 91,
+    "question": "TCP connections for downloading 4 files via FTP",
+    "answer": "**To download 4 files, **5 TCP connections **must be established: 1.  One persistent **control connection **for the entire session to exchange commands (like user IDs and passwords). 2. **Four separate data connections **, one for each individual file transfer.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 92,
+    "question": "MAC address vs. IP address for registration",
+    "answer": "**Universities and carriers collect the **MAC address **because it is a **permanent, flat identifier **associated with the hardware (the \"social security number\" of the device). In contrast, **IP addresses are transient **and change whenever a mobile device moves to a new subnet or has its lease expire via DHCP. The MAC address allows the system to identify the specific physical device regardless of its current network location.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 93,
+    "question": "Silly Window Syndrome (SWS)",
+    "answer": "**Silly Window Syndrome **is a phenomenon that causes extremely poor performance in TCP when data is exchanged in **very small segments **. It occurs if the sender transmits data in small chunks or if the receiver advertises small increments in window size (credit) after clearing its buffer, causing the **overhead of the headers **to become significantly larger than the actual data being transferred.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 94,
+    "question": "Differentiate between circuit switching and packet switching",
+    "answer": "*** **Circuit Switching: **Establishes a **dedicated communications path **with reserved resources (bandwidth and buffers); it provides a **guaranteed constant data rate **and involves no queuing delay once the circuit is set up. * **Packet Switching: **Uses resources **on demand **without reservation; data is sent in discrete packets that are **queued at nodes **, which can lead to variable delay or loss, but allows for more efficient sharing of link capacity. *** **Analogy for Circuit vs. Packet Switching: **Circuit switching is like a **reserved seat on a train **—you have a dedicated spot for the whole trip, but it's wasted if you don't show up. Packet switching is like a **public bus **—there is no reserved seat, and you might have to wait at the station if it's crowded, but the bus is used more efficiently by everyone.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 95,
+    "question": "Class/Type of Specific IP Addresses",
+    "answer": "**According to the traditional classful addressing scheme defined in the sources: * **a) 220.24.88.99: **This is a **Class C **address. Class C addresses have a first octet range of **192 to 223 **. * **b) 6.75.10.68: **This is a **Class A **address. Class A addresses have a first octet range of **1 to 126 **.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 96,
+    "question": "Duplicate IP Address Startup Scenario (Host A and B)",
+    "answer": "**When **Host B **starts up after **Host A **with the same IP address, a conflict occurs within the **ARP (Address Resolution Protocol) **mechanism. Typically, a newly arriving host may send an **ARP request **to resolve its own IP address to ensure it is unique; if Host B does this, **Host A will receive the broadcast **and may respond or log an error. If an external host sends an ARP query for that shared IP, **both Host A and Host B will respond **with their respective (different) MAC addresses. This leads to **inconsistent ARP tables **in other network nodes, a situation where the \"winning\" MAC address in a remote cache depends on which response arrived last, effectively disrupting reliable communication for both hosts.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 97,
+    "question": "Salient Features of IPv6",
+    "answer": "**The sources identify several key enhancements in **IPv6 **over IPv4: * **Expanded Addressing: **IPv6 uses **128-bit addresses **(compared to 32-bit), providing an effectively inexhaustible supply of unique identifiers. * **Streamlined Header: **It features a **fixed-length 40-byte header **with fewer fields (8 vs 12 in IPv4), which allows for **faster processing **by routers. * **Flow Labeling: **A 20-bit field allows a source to label packets for **special handling **(e.g., real-time service) by routers. * **Improved Options Mechanism: **Options are moved to **extension headers **located between the IP and transport headers, simplifying the main header. * **No Router Fragmentation: **IPv6 prohibits fragmentation at intermediate routers; it must be performed by the **source host **, which increases forwarding efficiency. * **Anycast Addresses: **A new type of address that allows a packet to be delivered to the **\"nearest\" member **of a group of functional interfaces.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 98,
+    "question": "Three Issues in the Data Link Layer",
+    "answer": "**The data link layer must address several fundamental communication challenges: * **Framing: **The need to **encapsulate network-layer datagrams **into distinct link-layer frames with recognizable boundaries. * **Link Access: **Coordinating how multiple nodes share a **broadcast medium **to prevent or manage collisions. * **Error Control: **Implementing mechanisms to **detect and potentially correct bit errors **introduced by signal attenuation or noise. * **Flow Control: **Ensuring a fast sender does not **overwhelm a slow receiver's buffer **capacity. *** **Analogy for IPv6 Addressing: **If **IPv4 **addresses were like a **small town's filing cabinet **where every citizen had a folder, **IPv6 **would be like giving a **unique folder to every single grain of sand on Earth **, ensuring we never run out of space to organize new information. **### **Unit I: Data Communication and Networking",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 99,
+    "question": "5. Main Difference: Fiber Optic vs. Twisted Pair",
+    "answer": "The main difference lies in their transmission capacity and immunity to interference. Optical fiber offers immense potential bandwidth (supporting hundreds of Gbps over tens of kilometers) and is immune to electromagnetic interference, crosstalk, and noise. Twisted pair is the least expensive and most common medium but is limited in distance, bandwidth, and data rate, and it is highly susceptible to electromagnetic interference and noise. 6. Stop-and-Wait Efficiency Calculation *   Given: Data rate ($R$) = 4 kbps (4000 bps); Propagation delay ($t_{prop}$) = 20 ms (0.02 s); Efficiency ($U$) $\\ge$ 50% (0.5). *   Formula: $U = 1 / (1 + 2a)$, where $a = t_{prop} / t_{trans}$. *   Calculation:     1.  $0.5 \\le 1 / (1 + 2a) \\implies 1 + 2a \\le 2 \\implies 2a \\le 1 \\implies a \\le 0.5$.     2.  $a = t_{prop} / t_{trans} \\implies 0.02 / t_{trans} \\le 0.5 \\implies t_{trans} \\ge 0.04$ seconds.     3.  $t_{trans} = \\text{Frame size} (L) / \\text{Rate} (R) \\implies L / 4000 \\ge 0.04 \\implies L \\ge 160$ bits. *   Answer: Stop-and-wait gives at least 50% efficiency for frame sizes of 160 bits or larger. 7. CRC Computation *   Message $M(X)$: $X^5 + X^4 + X + 1$ (Binary: 110011). *   Generator $G(X)$: $X^4 + X^3 + 1$ (Binary: 11001). *   Procedure: Multiply $M(X)$ by $X^r$ (where $r=4$ is the degree of $G(X)$) and divide by $G(X)$.     1.  Append four 0s to message: 1100110000.     2.  Divide 1100110000 by 11001 using modulo-2 arithmetic.     3.  110011 / 11001 = 1 with remainder 000001.     4.  Bring down the remaining 0s: 10000.     5.  10000 / 11001 = 0 with remainder 10000. *   CRC (FCS): The calculated CRC is 10000 (or $X^4$ in polynomial form). 8. Why IEEE 802.11 Frame uses 4 Address Fields The 802.11 frame uses multiple address fields for internetworking purposes. Three fields are typically used in infrastructure mode to indicate the receiver, transmitter, and the router interface (BSS identifier). The fourth address field is specifically required when Access Points (APs) forward frames to each other while operating in ad hoc mode. 9. Why CSMA/CD is Unsuitable for Ad Hoc Networks CSMA/CD is not suitable for wireless ad hoc environments because collision detection is often impossible. The strength of the station's own transmitted signal at the adapter is much higher than any incoming signal, making it difficult to detect interference. Furthermore, even with detection, a station cannot sense all collisions due to the hidden terminal problem (physical obstructions) and signal fading over distance. 10. Subnetting a Class C Network (192.168.1.0 with 255.255.255.240) *   Default Class C Mask: 255.255.255.0 (/24). *   Subnet Mask 240: In binary, 240 is 11110000. *   Subnet Bits: There are 4 bits borrowed from the host portion for subnetting. *   Host Bits: There are 4 bits remaining for host identifiers. *   Number of Networks: $2^4 =$ 16 subnets. *   Number of Hosts per Network: $2^4 - 2 =$ 14 usable hosts (subtracting the network and broadcast addresses). 11. IPv6 Header Size vs. Address Bits While IPv6 addresses are 128 bits (four times larger than the 32-bit IPv4 addresses), the IPv6 header is only 40 bytes, which is not a proportionate increase from the 20-byte IPv4 minimum. The designers achieved this by streamlining the header, reducing the number of fields from 12 in IPv4 to just 8 in IPv6. By moving optional information to extension headers and removing the header checksum to reduce processing time at each hop, the fixed-length header allows for faster processing by routers. 12. Protocols for E-mail with Text and Images *   Application Layer: The Simple Mail Transfer Protocol (SMTP) is used to transfer the email between hosts. Because the email contains an image, the MIME (Multi-Purpose Internet Mail Extensions) protocol is required to wrap the non-textual data into a format that SMTP can handle. *   Transport Layer: TCP (Transmission Control Protocol) is the underlying protocol used by SMTP to ensure the reliable delivery of the mail message. 13. Receiver-Host Functionality of UDP At the receiver host, UDP acts as a simple demultiplexer. It uses the destination port number found in the segment header to deliver the data to the correct intermediary socket for the intended application. It also performs a checksum calculation for error detection; if the calculated checksum does not match the value in the header, the segment is typically discarded. 14. TCP Reliability Mechanisms TCP ensures reliable data transfer over an unreliable network layer using several coordinated mechanisms: *   Checksums to detect bit errors in segments. *   Sequence Numbers to ensure data is reassembled in the proper order and to detect duplicates. *   Acknowledgments (ACKs) and Timers; if a sender does not receive an ACK before the timer expires, it retransmits the data. *   Flow and Congestion Control to regulate the rate of data transmission to prevent overwhelming the receiver or the network. 15. Separating Transport and Network Layers The Transport and Network layers cannot be combined because they have different scopes of communication. The network layer provides host-to-host logical communication (connecting two machines), while the transport layer provides process-to-process logical communication (connecting specific applications running on those machines). This separation allows the transport layer to provide a reliable service even when the underlying network layer is unreliable. 16. Switch vs. Bridge Operations The significant difference lies in performance and implementation. A bridge is typically a two-port device that handles frame processing in software, whereas a layer 2 switch handles address recognition and frame forwarding in hardware. Furthermore, a bridge usually analyzes one frame at a time, while a switch has multiple parallel data paths to handle many frames simultaneously. 17. Data in the \"Pipe\" Calculation The amount of data that fits in the \"pipe\" is determined by the bandwidth-delay product ($Bandwidth \\times RTT$). *   Calculation: $155 \\text{ Mbps} \\times 0.120 \\text{ seconds} = 18.6 \\text{ million bits}$. *   Bytes: $18,600,000 / 8 = \\mathbf{2,325,000 \\text{ bytes}}$. 18. Advantages of Destination-Only Reassembly Performing reassembly only at the ultimate destination rather than at intermediate routers has several benefits: *   It reduces router complexity and speeds up the forwarding process because routers do not need to store and process partial datagrams. *   It allows for dynamic routing, as different fragments of the same datagram can follow different paths through the network. *   It prevents routers from needing large buffers to hold fragments, which would risk memory exhaustion. 19. Network Addresses for Specific IPs Under traditional classful addressing, the network addresses are as follows: *   i. 127.29.12.78: This falls in the 127.0.0.0 range, which is reserved for loopback. *   ii. 159.78.9.10: This is a Class B address (range 128–191). The network address is 159.78.0.0. *   iii. 192.20.10.11: This is a Class C address (range 192–223). The network address is 192.20.10.0. *   iv. 230.23.88.99: This is a Class D address, used for multicast groups, and does not have a traditional network/host split. 20. Similar Services in Data Link and Transport Layers Providing similar services (like error control) in both layers is necessary due to the end-to-end principle. While the data link layer can correct errors locally on a high-error link (like a wireless link) to improve efficiency, it is incomplete because it cannot guarantee delivery if a router between the source and destination crashes or drops a packet due to congestion. Thus, the transport layer must provide a comprehensive end-to-end check to ensure all data actually reached the final application intact. 21. Why FTP uses 2 port numbers? The File Transfer Protocol (FTP) uses two separate TCP connections to handle different tasks efficiently. The first is a control connection used for the exchange of commands and responses, such as user identification, passwords, and file action requests. The second connection is established specifically for the actual data transfer once the transfer has been approved via the control connection. This separation allows control information to be managed independently of the raw data stream. 22. State the significance of SMI in network management. The Structure of Management Information (SMI) is a formal data description language used to define the objects within a Management Information Base (MIB). Its primary significance is ensuring that the syntax and semantics of network management data are unambiguous and well-defined, which allows for interoperability between different management stations and agents from various vendors. It restricts MIB data to simple types, such as scalars and two-dimensional tables, to maintain simplicity and extensibility in the network management framework. 23. Compare traditional switch with SDN enabled switch in terms of handling forwarding decisions. *   Traditional Switch/Router: Forwarding decisions are typically destination-based, meaning the device examines the destination IP address of an arriving packet to index a local forwarding table. The control-plane logic (routing algorithms) and the data-plane forwarding functions are implemented monolithically within each individual device. *   SDN Enabled Switch: Forwarding is generalized using a \"match-plus-action\" paradigm. The switch can match packets based on various header fields from multiple protocol layers (link, network, and transport layers). Crucially, the forwarding tables (flow tables) are computed and distributed by a logically centralized remote controller that is physically separate from the switching hardware. 24. Why CSMA/CD is not appropriate for full-duplex Ethernet environment? CSMA/CD (Carrier Sense Multiple Access with Collision Detection) is designed to manage a shared broadcast medium where collisions occur when multiple stations transmit simultaneously. In a full-duplex Ethernet environment, stations are typically connected via a switch that provides dedicated capacity for both transmission and reception. Because full-duplex switches coordinate transmissions so that a switch and a node can send frames to each other at the same time without interference, there are no collisions in the channel. Consequently, the CSMA/CD algorithm—intended specifically to detect and recover from collisions—is unnecessary and no longer needed. *** Analogy for SDN vs. Traditional Switching: Think of a traditional switch like a driver who has to stop at every intersection, look at a local map, and decide which way to turn based on their own knowledge. An SDN-enabled switch is like a train following tracks laid out by a centralized dispatcher; the train doesn't need to know the whole map, it just follows the specific \"match-plus-action\" instructions sent from the central office. 1.\tDifferentiate between Router and Gateway. 2. If the packet has to go through 3 routers, how many times will encapsulation and decapsulation take place? 3. List out any three issues in the data link layer. 4. Draw the IEEE 802.3 frame format. 5. Differentiate between ARP and DHCP protocol. 6. Indicate the Class/type of the following IP addresses: a. 134.53.0.0 b. 1.78.9.23 7. How TCP provide reliable data delivery? Justify your 8. Describe the various part of HTTP. 9. List out some open source network monitoring tools. 10. Mention few points about Software Defined Network 11. List any two applications that you use on daily basis that requires very high bandwidth from the network? 12. If the packet has to go through 2 routers, how many times will encapsulation and decapsulation take place?  13. Differentiate between a modem, a switch and a router.  14. Data is sent in 1000-byte segments over a fiber line with a distance of 10000km. link bandwidth is 2Gbps. An ACK packet of 100 bytes is returned. Calculate the RTT. How many data segments should be sent in an RTT to obtain 100% utilization of bandwidth. 15. Mention about the following HTTP Status Response codes 200, 301, 400, 401, 505. 16. How the 3-way handshaking process is differ from 2-way, connection establishment in TCP? 17. Show the TCP connections that will have to be established to download 4 files between an FTP client and an FTP server. 18. Why RCC of Anna university getting your MAC address instead of IP Address in Wi-Fi registration Form? 19. What is silly window syndrome in TCP? 20. Differentiate between circuit switching and packet switching.  21. Indicate the class / type of the following IP addresses: a)220.24.88.99 b) 6.75.10.68 22. Suppose hosts A and B are assigned the same IP address on the Ethernet, on which ARP is used, B starts up after A. What will happen? 23. Mention the salient features of IPv6. 24. List out any three issues in the data link layer. 1. Differentiate between Router and Gateway A router is a network-layer (Layer 3) packet switch that determines the end-to-end paths packets take from a source to a destination by using a routing algorithm and a forwarding table. It functions by relaying data from one network to another while remaining oblivious to transport-layer connections. In contrast, a gateway is an intermediary program that acts as a protocol translator, often providing access to resources stored on non-HTTP systems (e.g., translating HTTP to FTP) or acting as a portal through network firewalls. Unlike a traditional router, a gateway receives requests as if it were the original server for the requested resource, and the client may be unaware it is communicating with one. 2. Encapsulation and Decapsulation through 3 Routers If a packet must traverse three routers, encapsulation will take place four times and decapsulation will take place four times. The source host performs the initial encapsulation down to the link-layer frame. Each of the three routers must decapsulate the incoming link-layer frame to the network layer (IP) to examine the destination address, and then re-encapsulate the datagram into a new link-layer frame for the next hop. Finally, the destination host performs the last decapsulation of the frame up to the application-layer message. 3. Issues in the Data Link Layer Three primary issues addressed by the data link layer are: *   Framing: The process of encapsulating a network-layer datagram within a link-layer frame, including a header and trailer, before transmission. *   Link Access: Managing how multiple nodes share a broadcast link through a medium access control (MAC) protocol to coordinate transmissions and resolve conflicts. *   Error Detection and Correction: Implementing mechanisms to detect and fix bit errors caused by signal attenuation or electromagnetic noise using techniques like CRC (Cyclic Redundancy Check). 4. IEEE 802.3 Frame Format The IEEE 802.3 (Ethernet) frame consists of the following sequential fields: *   Preamble (7 octets): Alternating 0s and 1s to synchronize the receiver's clock. *   Start Frame Delimiter (SFD) (1 octet): Indicates the actual start of the frame. *   Destination MAC Address (6 bytes): The physical address of the receiving adapter. *   Source MAC Address (6 bytes): The physical address of the transmitting adapter. *   Length/Type (2 bytes): Indicates the length of the data field or the specific upper-layer protocol (e.g., IP). *   Data/LLC Data (46 to 1500 bytes): Carries the network-layer datagram; padding is added if it is less than 46 bytes. *   Pad (variable): Added to ensure the frame meets the minimum length requirements for collision detection. *   Frame Check Sequence (FCS) (4 bytes): A 32-bit CRC used by the receiver to detect bit errors in the frame. 5. Differentiate between ARP and DHCP Protocol ARP (Address Resolution Protocol) is used to resolve an IP address to a MAC address for nodes located on the same local subnet, acting as a \"plug-and-play\" tool that builds mapping tables automatically. DHCP (Dynamic Host Configuration Protocol) is a client-server protocol that allows a newly arrived host to automatically obtain an IP address from a network server. While ARP handles local physical addressing, DHCP provides a full network configuration, including the host's IP address, subnet mask, the address of the default gateway, and the local DNS server address. 6. Class/Type of IP Addresses *   a. 134.53.0.0: This is a Class B address. (The range for Class B network addresses is 128 to 191 in the first octet). *   b. 1.78.9.23: This is a Class A address. (The range for Class A network addresses is 1 to 126 in the first octet). 7. How TCP Provides Reliable Data Delivery TCP provides reliable data delivery by transforming the unreliable \"best-effort\" service of the IP layer into a service that ensures data is uncorrupted, without gaps, and in sequence. It justifies this reliability through several mechanisms: checksums for detecting bit errors, sequence numbers to reorder packets and detect duplicates, acknowledgments (ACKs) from the receiver to confirm successful delivery, and timers that trigger the retransmission of segments if an acknowledgment is not received within a specific timeout interval. 8. Various Parts of HTTP The HTTP message structure consists of the following components: *   Request Line (Request) / Status Line (Response): The first line indicating the method (e.g., GET, POST) and URL for requests, or the success/error code for responses. *   General Header: Fields applicable to both requests and responses that do not apply to the data being transferred (e.g., Date, Connection). *   Request/Response Header: Specific headers containing information about the client's capabilities or the server's software. *   Entity Header: Metadata regarding the resource identified by the request and the entity body (e.g., Content-Type, Content-Length). *   Entity Body: The actual payload of the message, containing the resource data such as HTML text or binary image data. 9. Open Source Network Monitoring Tools *   Wireshark: A free, open-source packet sniffer and protocol analyzer that allows users to capture and examine protocol messages in real time. *   Nmap: A widely used public-domain port-scanning tool that can discover open ports, network applications, and operating system versions. *   SONiC: A Linux-based open-source initiative for networking operating systems used in large-scale environments. 10. Software Defined Network (SDN) Software Defined Networking (SDN) is an architecture characterized by the separation of the data plane and the control plane. In this paradigm, the network control functions are moved external to the physical switches and implemented in a logically centralized remote controller (software). Forwarding in SDN is flow-based, allowing packet switches to match packets using values from across different protocol layers (Link, Network, and Transport) rather than just destination IP addresses. This makes the network highly programmable through control applications that can manage routing, load balancing, and firewalling by distributing flow tables to the hardware. *** Analogy for Encapsulation: Imagine a letter (the data) being placed inside a series of envelopes. The first envelope is for the recipient's office (Transport), the second is for their building (Network), and the third is for the delivery truck (Link). Every time the letter reaches a major sorting center (a Router), workers must open the outer truck envelope to read the building address on the inner envelope, then place it into a new truck envelope for the next leg of the trip. Only the final recipient opens every envelope to read the actual message. 11. Two high-bandwidth applications Based on the sources, two applications used on a daily basis that require very high bandwidth from the network are video streaming (such as YouTube, Netflix, and Amazon Prime) and video conferencing (such as Skype, Facetime, and Google Hangouts). 12. Encapsulation and decapsulation through 2 routers If a packet must go through two routers, encapsulation will take place three times and decapsulation will take place three times. *   Source Host: Encapsulates the application message into a transport segment, then a network datagram, and finally a link-layer frame. *   Router 1: Decapsulates the frame to read the network datagram (IP), then re-encapsulates it into a new link-layer frame for the next hop. *   Router 2: Decapsulates the frame to read the datagram, then re-encapsulates it for the final destination. *   Destination Host: Performs the final decapsulation of the frame and datagram to deliver the message to the application. 13. Differentiate between a modem, a switch, and a router *   Modem: A transmitter/receiver that converts digital bit streams into analog signals for transmission over analog media (like telephone lines) and converts them back into digital format at the receiving end. *   Switch: A link-layer device that forwards frames based on MAC addresses; it is typically used in access networks to interconnect multiple devices within a single local network. *   Router: A network-layer device that forwards packets based on destination IP addresses; its primary role is to determine the end-to-end paths between different networks. 14. RTT and Bandwidth Utilization Calculation *   Given: Data size ($L$) = 1000 bytes (8000 bits); distance ($d$) = 10,000 km ($10^7$ m); link bandwidth ($R$) = 2 Gbps ($2 \\times 10^9$ bps); ACK size = 100 bytes (800 bits). *   Step 1: Calculate Propagation Delay ($t_{prop}$): Using a standard propagation speed in fiber ($2 \\times 10^8$ m/s), $t_{prop} = 10,000,000 / 200,000,000 = 0.05$ seconds (50 ms). *   Step 2: Calculate Transmission Delays ($t_{trans}$):     *   Data $t_{trans} = 8000 / (2 \\times 10^9) = 0.000004$ s ($4 \\mu s$).     *   ACK $t_{trans} = 800 / (2 \\times 10^9) = 0.0000004$ s ($0.4 \\mu s$). *   Step 3: Calculate RTT: $RTT = \\text{Data } t_{trans} + t_{prop} + \\text{ACK } t_{trans} + t_{prop} = 4\\mu s + 50ms + 0.4\\mu s + 50ms = \\mathbf{100.0044 \\text{ ms}}$. *   Step 4: Segments for 100% utilization: This is the bandwidth-delay product: $(2 \\times 10^9 \\text{ bps} \\times 0.1000044 \\text{ s}) / 8000 \\text{ bits/segment} \\approx \\mathbf{25,001 \\text{ segments}}$. 15. HTTP Status Response Codes *   200 OK: The request succeeded and information is returned in the response. *   301 Moved Permanently: The requested object has been permanently moved to a new URL specified in the Location header. *   400 Bad Request: A generic error indicating the server could not understand the request. *   401 Unauthorized: Indicates an authentication error (required but missing or invalid). *   505 HTTP Version Not Supported: The requested protocol version is not supported by the server. 16. 3-way vs. 2-way Handshaking in TCP The 3-way handshake (SYN $\\rightarrow$ SYN-ACK $\\rightarrow$ ACK) is required to ensure that both sides have established sequence numbers and are ready to communicate, preventing problems caused by obsolete segments from previous connections. A 2-way handshake is insufficient because a delayed duplicate SYN from an old connection could arrive at a server, which would then open a half-open connection for a request that is no longer valid. 17. TCP connections for downloading 4 files via FTP To download 4 files, 5 TCP connections must be established: 1.  One persistent control connection for the entire session to exchange commands (like user IDs and passwords).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 100,
+    "question": "Four separate data connections",
+    "answer": ", one for each individual file transfer. 18. MAC address vs. IP address for registration Universities and carriers collect the MAC address because it is a permanent, flat identifier associated with the hardware (the \"social security number\" of the device). In contrast, IP addresses are transient and change whenever a mobile device moves to a new subnet or has its lease expire via DHCP. The MAC address allows the system to identify the specific physical device regardless of its current network location. 19. Silly Window Syndrome (SWS) Silly Window Syndrome is a phenomenon that causes extremely poor performance in TCP when data is exchanged in very small segments. It occurs if the sender transmits data in small chunks or if the receiver advertises small increments in window size (credit) after clearing its buffer, causing the overhead of the headers to become significantly larger than the actual data being transferred. 20. Differentiate between circuit switching and packet switching *   Circuit Switching: Establishes a dedicated communications path with reserved resources (bandwidth and buffers); it provides a guaranteed constant data rate and involves no queuing delay once the circuit is set up. *   Packet Switching: Uses resources on demand without reservation; data is sent in discrete packets that are queued at nodes, which can lead to variable delay or loss, but allows for more efficient sharing of link capacity. *** Analogy for Circuit vs. Packet Switching: Circuit switching is like a reserved seat on a train—you have a dedicated spot for the whole trip, but it's wasted if you don't show up. Packet switching is like a public bus—there is no reserved seat, and you might have to wait at the station if it's crowded, but the bus is used more efficiently by everyone. 21. Class/Type of Specific IP Addresses According to the traditional classful addressing scheme defined in the sources: *   a) 220.24.88.99: This is a Class C address. Class C addresses have a first octet range of 192 to 223. *   b) 6.75.10.68: This is a Class A address. Class A addresses have a first octet range of 1 to 126. 22. Duplicate IP Address Startup Scenario (Host A and B) When Host B starts up after Host A with the same IP address, a conflict occurs within the ARP (Address Resolution Protocol) mechanism. Typically, a newly arriving host may send an ARP request to resolve its own IP address to ensure it is unique; if Host B does this, Host A will receive the broadcast and may respond or log an error. If an external host sends an ARP query for that shared IP, both Host A and Host B will respond with their respective (different) MAC addresses. This leads to inconsistent ARP tables in other network nodes, a situation where the \"winning\" MAC address in a remote cache depends on which response arrived last, effectively disrupting reliable communication for both hosts. 23. Salient Features of IPv6 The sources identify several key enhancements in IPv6 over IPv4: *   Expanded Addressing: IPv6 uses 128-bit addresses (compared to 32-bit), providing an effectively inexhaustible supply of unique identifiers. *   Streamlined Header: It features a fixed-length 40-byte header with fewer fields (8 vs 12 in IPv4), which allows for faster processing by routers. *   Flow Labeling: A 20-bit field allows a source to label packets for special handling (e.g., real-time service) by routers. *   Improved Options Mechanism: Options are moved to extension headers located between the IP and transport headers, simplifying the main header. *   No Router Fragmentation: IPv6 prohibits fragmentation at intermediate routers; it must be performed by the source host, which increases forwarding efficiency. *   Anycast Addresses: A new type of address that allows a packet to be delivered to the \"nearest\" member of a group of functional interfaces. 24. Three Issues in the Data Link Layer The data link layer must address several fundamental communication challenges: *   Framing: The need to encapsulate network-layer datagrams into distinct link-layer frames with recognizable boundaries. *   Link Access: Coordinating how multiple nodes share a broadcast medium to prevent or manage collisions. *   Error Control: Implementing mechanisms to detect and potentially correct bit errors introduced by signal attenuation or noise. *   Flow Control: Ensuring a fast sender does not overwhelm a slow receiver's buffer capacity. *** Analogy for IPv6 Addressing: If IPv4 addresses were like a small town's filing cabinet where every citizen had a folder, IPv6 would be like giving a unique folder to every single grain of sand on Earth, ensuring we never run out of space to organize new information. ### Unit I: Data Communication and Networking",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 101,
+    "question": "What are the primary components of a data communication system?",
+    "answer": "A data communication system has five components: the message, the sender, the receiver, the transmission medium, and the protocol.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 102,
+    "question": "What is the function of the transmitter in a communications model?",
+    "answer": "The transmitter transforms and encodes information into electromagnetic signals that can be propagated across a transmission system.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 103,
+    "question": "Differentiate between a host and an end system.",
+    "answer": "The sources use these terms interchangeably; they refer to computing devices like PCs, servers, and mobile units that sit at the \"edge\" of the network.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 104,
+    "question": "How does a switch differ from a hub regarding collision domains?",
+    "answer": "A hub creates a single collision domain where only one station can transmit at a time, whereas a switch provides dedicated capacity to each station, effectively eliminating collisions.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 105,
+    "question": "Define the role of a gateway in an internetwork.",
+    "answer": "A gateway connects networks using different protocols or architectures, performing protocol translation when required.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 106,
+    "question": "What is the \"network core\"?",
+    "answer": "The network core is the mesh of packet switches and links that interconnects the Internet’s end systems.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 107,
+    "question": "Compare the OSI and TCP/IP protocol architectures.",
+    "answer": "TCP/IP has five layers (Physical, Network Access, Internet, Transport, Application), while OSI has seven, adding Session and Presentation layers.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 108,
+    "question": "What are the key elements of a protocol?",
+    "answer": "A protocol consists of syntax (format), semantics (control and error handling), and timing (speed matching).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 109,
+    "question": "What is encapsulation in networking?",
+    "answer": "Encapsulation is the process of adding control information (headers/trailers) to data at each layer of the protocol stack.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 110,
+    "question": "Define a \"switched communications network.\"",
+    "answer": "It is a network where data are routed from source to destination by being switched from node to node rather than being broadcast to everyone.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 111,
+    "question": "What is the purpose of the \"Internet Layer\" in TCP/IP?",
+    "answer": "It handles the routing of data through the internet across multiple networks using the Internet Protocol (IP).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 112,
+    "question": "Define a \"Broadcast Network.\"",
+    "answer": "In a broadcast network, a transmission from one station is received by all other stations sharing the same medium.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 113,
+    "question": "What are \"Trunks\" in a public telecommunications network?",
+    "answer": "Trunks are high-capacity branches between exchanges that carry multiple voice/data circuits using multiplexing.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 114,
+    "question": "What is the primary function of the \"Physical Layer\"?",
+    "answer": "It covers the physical interface and transmission of unstructured bit streams over a physical medium.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 115,
+    "question": "Explain the term \"Address Scope.\"",
+    "answer": "It refers to whether an address is global (unique across the internet) or local (unique only within a specific network).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 116,
+    "question": "What is \"Upward Multiplexing\"?",
+    "answer": "It occurs when multiple higher-layer connections are multiplexed onto a single lower-layer connection [18.1, 2508].",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 117,
+    "question": "What is a \"Router\"?",
+    "answer": "A router is a Layer 3 device that routes packets between potentially different networks using a forwarding table.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 118,
+    "question": "Why is the \"Best-Effort\" service model used in the IP layer?",
+    "answer": "It is used because it provides a simple, scalable delivery mechanism without making strict guarantees on delay or loss.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 119,
+    "question": "What are the three agents involved in communication?",
+    "answer": "Communication involves applications, computers, and networks.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 120,
+    "question": "Define \"Peer Layers.\"",
+    "answer": "Peer layers are the corresponding layers in two different systems that communicate using a specific protocol. --- ### Unit II: Physical and Data Link Layers",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 121,
+    "question": "What is the main advantage of optical fiber over twisted pair?",
+    "answer": "Optical fiber offers higher bandwidth, lower attenuation, and complete immunity to electromagnetic interference.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 122,
+    "question": "What are the two varieties of twisted pair cable?",
+    "answer": "They are Unshielded Twisted Pair (UTP) and Shielded Twisted Pair (STP).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 123,
+    "question": "Define \"Forward Error Correction\" (FEC).",
+    "answer": "FEC is the ability of a receiver to detect and correct errors in a bit stream without requesting a retransmission.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 124,
+    "question": "How does a \"Cyclic Redundancy Check\" (CRC) work?",
+    "answer": "The sender appends bits to data so the resulting frame is exactly divisible by a predetermined divisor; the receiver checks for a remainder.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 125,
+    "question": "What is the \"Hidden Terminal Problem\"?",
+    "answer": "It occurs in wireless networks when physical obstructions prevent a station from sensing that another station is currently transmitting.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 126,
+    "question": "What is the function of the \"MAC\" sublayer?",
+    "answer": "The Medium Access Control sublayer governs access to the shared transmission medium.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 127,
+    "question": "How does \"Sliding-Window\" flow control work?",
+    "answer": "A sender can transmit multiple frames (a window) before needing an acknowledgment, improving efficiency over long-delay links.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 128,
+    "question": "Define \"Bit Stuffing.\"",
+    "answer": "It is a technique used in bit-oriented protocols like HDLC to ensure a flag pattern does not appear in the middle of a frame.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 129,
+    "question": "What is the \"Binary Exponential Backoff\" algorithm?",
+    "answer": "It is a method where a station increases its wait time exponentially after repeated collisions to reduce the probability of further collisions.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 130,
+    "question": "What is a \"VLAN\"?",
+    "answer": "A Virtual Local Area Network is a logical partition of a physical switch that isolates traffic as if it were on a separate network.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 131,
+    "question": "Explain \"CSMA/CA.\"",
+    "answer": "Used in 802.11 WiFi, Carrier Sense Multiple Access with Collision Avoidance uses \"handshaking\" (RTS/CTS) to avoid collisions before they occur.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 132,
+    "question": "What is \"Bluetooth\"?",
+    "answer": "It is a short-range, low-power Wireless Personal Area Network (WPAN) technology designed for cable replacement.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 133,
+    "question": "What are the issues addressed by the Data Link Layer?",
+    "answer": "Key issues include framing, link access (MAC), and error/flow control.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 134,
+    "question": "What is \"Propagation Delay\"?",
+    "answer": "It is the time it takes for a bit to travel from the sender to the receiver across the medium.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 135,
+    "question": "Explain the \"Stop-and-Wait\" protocol.",
+    "answer": "The sender transmits one frame and waits for an ACK before sending the next; it is simple but inefficient on long-delay links.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 136,
+    "question": "What are \"Collision Domains\"?",
+    "answer": "A collision domain is a network segment where simultaneous transmissions from two or more devices will result in a collision.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 137,
+    "question": "What is the \"Preamble\" in an Ethernet frame?",
+    "answer": "It is a 7-byte pattern used to synchronize the receiver's clock with the transmitter.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 138,
+    "question": "Define \"Bipolar-AMI.\"",
+    "answer": "A signaling scheme where binary 0 is zero voltage and binary 1 is represented by alternating pulses of positive and negative polarity.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 139,
+    "question": "What is a \"Modem\"?",
+    "answer": "A device that performs modulation and demodulation, converting digital data into analog signals for transmission over analog lines.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 140,
+    "question": "How does \"Differential Manchester\" encoding work?",
+    "answer": "The transition at the middle of the bit interval is for clocking, while the presence or absence of a transition at the start represents the data bit. --- ### Unit III: Network Layer",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 141,
+    "question": "What is the difference between \"Routing\" and \"Forwarding\"?",
+    "answer": "Routing is the network-wide process of planning paths, while forwarding is the local action of moving a packet from input to output.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 142,
+    "question": "Explain \"Distance-Vector Routing.\"",
+    "answer": "Each router maintains a table of distances to all destinations and periodically exchanges this table with its neighbors.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 143,
+    "question": "Define \"Link-State Routing.\"",
+    "answer": "Each router broadcasts the status of its directly connected links to all other routers, allowing everyone to build a complete network map.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 144,
+    "question": "What is the \"Bellman-Ford Equation\"?",
+    "answer": "It states that the least cost from $x$ to $y$ is the minimum of the cost to a neighbor $v$ plus the least cost from $v$ to $y$.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 145,
+    "question": "Define \"Autonomous System\" (AS).",
+    "answer": "An AS is a set of routers and networks under a single administrative control using a common interior routing protocol.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 146,
+    "question": "What is the role of \"BGP\"?",
+    "answer": "The Border Gateway Protocol is the \"glue\" of the Internet, used to exchange reachability information between different autonomous systems.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 147,
+    "question": "What is \"CIDR\"?",
+    "answer": "Classless Inter-Domain Routing replaces the classful address system by allowing variable-length network prefixes.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 148,
+    "question": "Explain \"Subnetting.\"",
+    "answer": "It is the practice of partitioning a single network address into multiple smaller logical sub-networks using a subnet mask.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 149,
+    "question": "What does \"DHCP\" provide?",
+    "answer": "The Dynamic Host Configuration Protocol allows hosts to automatically obtain an IP address, subnet mask, and default gateway.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 150,
+    "question": "Define \"NAT.\"",
+    "answer": "Network Address Translation allows a private network to use one public IP address for all its internal devices by mapping internal IP/ports to external ones.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 151,
+    "question": "What is \"ICMP\"?",
+    "answer": "The Internet Control Message Protocol is used by routers and hosts to communicate network-level information, such as error reporting.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 152,
+    "question": "Why was IPv6 developed?",
+    "answer": "It was created primarily because the 32-bit address space of IPv4 was being exhausted.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 153,
+    "question": "What is \"IP-Anycast\"?",
+    "answer": "A service where a packet is routed to the nearest server among a group of servers sharing the same IP address.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 154,
+    "question": "What is the \"Count-to-Infinity\" problem?",
+    "answer": "A routing loop in Distance Vector protocols where an unreachable destination's distance slowly increases toward infinity during update cycles.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 155,
+    "question": "Explain \"Hot Potato Routing.\"",
+    "answer": "A strategy in BGP where an AS tries to get a packet out of its network as quickly as possible by choosing the nearest gateway.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 156,
+    "question": "What is a \"Static Routing Algorithm\"?",
+    "answer": "An algorithm where routes change very slowly, usually through manual configuration by a human operator.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 157,
+    "question": "Define \"Address Aggregation.\"",
+    "answer": "The ability to use a single prefix to advertise routes to multiple physical sub-networks.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 158,
+    "question": "What is \"Tunneling\" in the context of IPv6?",
+    "answer": "It is the process of encapsulating an IPv6 datagram inside an IPv4 datagram so it can pass through IPv4 routers.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 159,
+    "question": "What is the \"Next-Hop\" attribute in BGP?",
+    "answer": "It is the IP address of the router that is the first hop on a BGP route outside the current AS.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 160,
+    "question": "Define \"Link-State Broadcast.\"",
+    "answer": "The mechanism by which each node broadcasts its link costs to all other nodes in the network. --- ### Unit IV: Transport and Application Layers",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 161,
+    "question": "What are the two primary transport protocols in the Internet?",
+    "answer": "They are TCP (Transmission Control Protocol) and UDP (User Datagram Protocol).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 162,
+    "question": "How does TCP provide \"Reliable Data Transfer\"?",
+    "answer": "TCP uses checksums, sequence numbers, acknowledgments (ACKs), and timers to ensure a reliable byte stream.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 163,
+    "question": "What is the \"Three-Way Handshake\" in TCP?",
+    "answer": "It is the process (SYN $\\rightarrow$ SYN-ACK $\\rightarrow$ ACK) used to synchronize sequence numbers and establish a connection.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 164,
+    "question": "Explain \"Slow Start\" in TCP.",
+    "answer": "A congestion control phase where the sender begins with a small congestion window and doubles it every RTT until a threshold is reached.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 165,
+    "question": "What is \"Silly Window Syndrome\"?",
+    "answer": "A performance issue where data is exchanged in very small segments, causing high overhead.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 166,
+    "question": "Define \"UDP.\"",
+    "answer": "UDP is a connectionless, \"no-frills\" transport protocol that provides process-to-process delivery with no reliability or flow control.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 167,
+    "question": "What is a \"Socket\"?",
+    "answer": "A socket is the software interface (API) between an application process and the transport layer protocol.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 168,
+    "question": "What is \"HTTP\"?",
+    "answer": "The Hypertext Transfer Protocol is the request-response protocol used for the World Wide Web.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 169,
+    "question": "Explain \"DNS.\"",
+    "answer": "The Domain Name System is a directory service that translates human-friendly hostnames into numerical IP addresses.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 170,
+    "question": "How does \"FTP\" handle data and control?",
+    "answer": "FTP uses two parallel TCP connections: one on port 21 for control commands and another on port 20 for the actual data transfer.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 171,
+    "question": "What is \"RTCP\"?",
+    "answer": "The RTP Control Protocol provides feedback on the quality of data distribution and information about the source in a session.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 172,
+    "question": "Define \"SIP.\"",
+    "answer": "The Session Initiation Protocol is an application-layer protocol for setting up and managing real-time sessions like VoIP.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 173,
+    "question": "What is \"Fast Retransmit\" in TCP?",
+    "answer": "A mechanism where a sender retransmits a segment immediately after receiving three duplicate ACKs, before the timer expires.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 174,
+    "question": "Differentiate between \"Non-persistent\" and \"Persistent\" HTTP.",
+    "answer": "Non-persistent HTTP sends each object over a new TCP connection, while persistent HTTP sends multiple objects over a single connection.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 175,
+    "question": "What is \"Flow Control\" in TCP?",
+    "answer": "It is a speed-matching service where the receiver tells the sender how much buffer space is available using a \"receive window\".",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 176,
+    "question": "Explain \"Piggybacking.\"",
+    "answer": "A technique where an acknowledgment is included in a data frame being sent in the opposite direction.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 177,
+    "question": "What are \"Well-known Ports\"?",
+    "answer": "Ports (0–1023) reserved for standardized application services like HTTP (80) or SMTP (25).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 178,
+    "question": "What is \"MIME\"?",
+    "answer": "Multi-Purpose Internet Mail Extensions allow SMTP to carry non-textual data like images and attachments by defining new content types.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 179,
+    "question": "What is \"DASH\"?",
+    "answer": "Dynamic Adaptive Streaming over HTTP allows a client to dynamically request different quality levels of video based on current bandwidth.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 180,
+    "question": "What is \"Cumulative Acknowledgment\"?",
+    "answer": "An ACK that confirms the receipt of all bytes up to the indicated sequence number. --- ### Unit V: Network Monitoring and Management",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 181,
+    "question": "What is the goal of \"Network Management\"?",
+    "answer": "It involves monitoring, testing, configuring, and controlling network resources to meet performance and QoS requirements.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 182,
+    "question": "Define \"SNMP.\"",
+    "answer": "The Simple Network Management Protocol is the standard for exchanging management information between a managing station and agents.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 183,
+    "question": "What is a \"Management Information Base\" (MIB)?",
+    "answer": "A MIB is a collection of managed objects at an agent that a management station can query or set.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 184,
+    "question": "Explain an \"SNMP Trap.\"",
+    "answer": "An unsolicited message sent by an agent to a manager to notify it of an exceptional event like a link failure.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 185,
+    "question": "What is \"Software Defined Networking\" (SDN)?",
+    "answer": "SDN is an architecture that separates the data plane (forwarding) from the control plane (routing logic).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 186,
+    "question": "What is a \"Flow Table\" in SDN?",
+    "answer": "A table in an SDN switch that contains match-plus-action rules distributed by a logically centralized controller.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 187,
+    "question": "Define \"Wireshark.\"",
+    "answer": "An open-source packet sniffer and protocol analyzer used to capture and examine network traffic in real time.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 188,
+    "question": "What is \"nmap\"?",
+    "answer": "A public-domain port-scanning tool used to discover open ports and running applications on a network.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 189,
+    "question": "What is \"Abstract Syntax Notation One\" (ASN.1)?",
+    "answer": "A formal language used to describe data structures in a machine-independent way, used in the SMI for MIBs.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 190,
+    "question": "What are \"Middleboxes\"?",
+    "answer": "Intermediate boxes (like NATs or firewalls) that perform functions other than standard IP routing on the data path.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 191,
+    "question": "What is \"Network Provisioning\"?",
+    "answer": "The process of configuring and activating network services for users.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 192,
+    "question": "Explain \"Fault Isolation.\"",
+    "answer": "The process of locating and identifying a specific point of failure in a network to repair it.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 193,
+    "question": "What is the \"Northbound API\" in an SDN controller?",
+    "answer": "The interface that allows network-control applications to communicate with the SDN controller.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 194,
+    "question": "What is \"Load Balancing\"?",
+    "answer": "A service that distributes requests across multiple servers to optimize resource use and response time [1030, 31.2].",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 195,
+    "question": "What is \"Network Function Virtualization\" (NFV)?",
+    "answer": "The practice of implementing middlebox functions in software running on commodity hardware rather than dedicated boxes.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 196,
+    "question": "Define \"Service Level Agreement\" (SLA).",
+    "answer": "A formal contract between a service provider and a customer specifying the expected level of network performance.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 197,
+    "question": "What is \"POI\" (Point of Interconnect)?",
+    "answer": "A location where multiple ISPs peer together or exchange traffic (often called an IXP).",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 198,
+    "question": "Explain the \"SMI\" (Structure of Management Information).",
+    "answer": "The language used to define the syntax and semantics of MIB data to ensure interoperability.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 199,
+    "question": "What is \"Traffic Conditioning\"?",
+    "answer": "The functions of metering, marking, shaping, and dropping used to enforce a service level profile.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  },
+  {
+    "id": 200,
+    "question": "Why is the \"Logically Centralized\" control plane used in SDN?",
+    "answer": "It allows for a global view of the network, making it easier to implement complex management tasks like traffic engineering.",
+    "topic": "Computer Networks",
+    "difficulty": "medium"
+  }
+]
