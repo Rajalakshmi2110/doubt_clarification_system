@@ -1,5 +1,5 @@
 # UI Demo for Academic Panel Presentation
-
+python -m streamlit run professional_demo.py
 ## Professional Demo Interface
 
 Clean, professional interface designed specifically for academic panel presentations. All emojis and casual elements have been removed for a formal presentation environment.

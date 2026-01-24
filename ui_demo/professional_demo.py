@@ -15,8 +15,14 @@ import numpy as np
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-# Import modules
-from modules.module5a_question_validation.enhanced_validator import EnhancedQuestionValidator
+try:
+    from modules.module5a_question_validation.question_validator import EnhancedQuestionValidator
+except ImportError:
+    # Fallback: try direct import from correct path
+    import os
+    validator_path = os.path.join(project_root, 'modules', 'module5a_question_validation')
+    sys.path.insert(0, validator_path)
+    from question_validator import EnhancedQuestionValidator
 
 def main():
     st.set_page_config(
@@ -392,72 +398,80 @@ def show_module4_demo():
 def show_module5a_demo():
     st.header("Module 5A: Enhanced Question Validation")
     
-    st.subheader("Process Overview")
-    st.write("**Objective**: Validate and enhance user questions through multi-step analysis")
+    st.markdown("""
+    ### Validation States
     
-    # Validation pipeline
-    st.subheader("Validation Pipeline Components")
+    **🟢 VALID:** Question is well-formed and clearly within syllabus scope
+    → *Answer generated with full confidence*
     
-    pipeline_data = {
-        "Step": ["Grammar & Spelling", "Semantic Sanity", "Technical Accuracy", "Syllabus Relevance"],
-        "Weight": ["25%", "25%", "35%", "40%"],
-        "Function": [
-            "Auto-correct typos and punctuation",
-            "Validate question structure and coherence", 
-            "Check technical correctness of concepts",
-            "Match question to syllabus units using embeddings"
-        ],
-        "Threshold": ["0.7", "0.6", "0.8", "0.7"]
-    }
+    **🟡 WARNING:** Question is networking-related but weakly grounded or advanced
+    → *Answer generated with disclaimer about partial syllabus alignment*
     
-    df_pipeline = pd.DataFrame(pipeline_data)
-    st.dataframe(df_pipeline, use_container_width=True, hide_index=True)
+    **🔴 REJECTED:** Question is non-networking or technically incorrect
+    → *Question blocked and not forwarded to answer generation*
     
-    # Live validation demo
-    st.subheader("Question Validation Demonstration")
+    ### Key Features
+    ✔ ML-based validation using semantic similarity  
+    ✔ Dataset-driven learning from 200+ networking questions  
+    ✔ Non-blocking WARNING state supports learning flexibility  
+    ✔ No hardcoded keywords or fixed thresholds
+    """)
     
-    col1, col2 = st.columns(2)
+    # Initialize validator
+    try:
+        validator = EnhancedQuestionValidator()
+        st.success("✅ Validator loaded successfully")
+    except Exception as e:
+        st.error(f"❌ Error loading validator: {str(e)}")
+        return
     
-    with col1:
-        st.write("**Test Questions**")
+    st.subheader("Live Question Validation")
+    
+    user_question = st.text_input(
+        "Enter a question to validate:",
+        placeholder="Example: wht is tcp protocol"
+    )
+    
+    if user_question:
+        result = validator.validate_question(user_question)
         
-        test_cases = [
-            "wht is tcps",
-            "HTTP operates at transport layer", 
-            "What is TCP?",
-            "explain tcp connection fast",
-            "What is machine learning?"
-        ]
+        col1, col2 = st.columns(2)
         
-        selected_question = st.selectbox("Select test question:", test_cases)
-        custom_question = st.text_input("Or enter custom question:")
-        
-        question_to_validate = custom_question if custom_question else selected_question
-    
-    with col2:
-        if question_to_validate:
-            st.write("**Validation Results**")
+        with col1:
+            st.markdown("### Question Details")
+            st.write("**Original Question:**")
+            st.write(result["original_question"])
             
-            # Simulate validation based on question
-            if "wht is tcps" in question_to_validate.lower():
-                st.markdown('<p class="status-valid">STATUS: VALID (after corrections)</p>', unsafe_allow_html=True)
-                st.write("**Original:** wht is tcps")
-                st.write("**Corrected:** What is TCP?")
-                st.write("**Score:** 0.95")
-                st.write("**Corrections:** Grammar, spelling, punctuation")
-                st.write("**Matched Unit:** Transport Layer")
-                
-            elif "http operates at transport" in question_to_validate.lower():
-                st.markdown('<p class="status-rejected">STATUS: REJECTED</p>', unsafe_allow_html=True)
-                st.write("**Issue:** Technical inaccuracy")
-                st.write("**Explanation:** HTTP operates at Application Layer, not Transport Layer")
-                st.write("**Suggestion:** Ask about HTTP at the correct layer")
-                
+            st.write("**Corrected Question:**")
+            st.write(result["corrected_question"])
+            
+            if result.get('corrections_applied'):
+                st.write("**Applied Corrections:**")
+                st.write(", ".join(result['corrections_applied']))
+        
+        with col2:
+            st.markdown("### Validation Status")
+            status = result["status"]
+            
+            if status == "VALID":
+                st.success("✅ STATUS: VALID")
+                st.info("Question will be processed with full confidence")
+            elif status == "WARNING":
+                st.warning("⚠️ STATUS: WARNING")
+                st.info("Question will be processed with advisory feedback about weak syllabus alignment")
             else:
-                st.markdown('<p class="status-valid">STATUS: VALID</p>', unsafe_allow_html=True)
-                st.write("**Score:** 0.88")
-                st.write("**Matched Unit:** Computer Networks")
-                st.write("**No corrections needed**")
+                st.error("❌ STATUS: REJECTED")
+                st.error("Question blocked - not forwarded to answer generation")
+            
+            st.write(f"**Final Confidence Score:** {result['final_score']}")
+        
+        st.divider()
+        
+        st.markdown("### Component Analysis")
+        st.json(result["component_scores"])
+        
+        st.markdown("### System Feedback")
+        st.json(result["feedback"])
 
 def show_live_demo():
     st.header("Live System Demonstration")
@@ -513,20 +527,34 @@ def show_live_demo():
                     if 'component_scores' in result:
                         scores = result['component_scores']
                         
+                        # Show validation method
+                        method = result.get('validation_method', 'Unknown')
+                        if method == 'FLAN-T5':
+                            st.info(f"🤖 **Validation Method:** {method} (Contextual AI)")
+                        else:
+                            st.info(f"📊 **Validation Method:** {method} (Similarity)")
+                        
                         score_data = {
-                            "Component": ["Semantic Sanity", "Technical Accuracy", "Syllabus Relevance"],
+                            "Component": ["Semantic Sanity", "Syllabus Relevance"],
                             "Score": [
                                 f"{scores.get('semantic_sanity', 0):.2f}",
-                                f"{scores.get('technical_accuracy', 0):.2f}", 
                                 f"{scores.get('syllabus_relevance', 0):.2f}"
                             ]
                         }
                         
+                        # Show detailed method info
+                        if 'relevance_details' in result:
+                            details = result['relevance_details']
+                            method_used = details.get('method', 'Unknown')
+                            st.write(f"**Detection Method:** {method_used}")
+                            
+                            if 'reason' in details:
+                                st.write(f"**Analysis:** {details['reason']}")
+                        
                         df_scores = pd.DataFrame(score_data)
                         st.dataframe(df_scores, use_container_width=True, hide_index=True)
                     
-                    if result.get('matched_unit'):
-                        st.write(f"**Matched Syllabus Unit:** {result.get('unit_title', 'N/A')}")
+
                 
                 # Feedback section
                 if 'feedback' in result:

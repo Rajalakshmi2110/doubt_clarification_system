@@ -30,7 +30,9 @@ RAG-based system for textbook-grounded academic question answering.
 
 ### Backend:
 ```bash
-python flask_server.py
+cd backend
+pip install -r api_requirements.txt
+python api_server.py
 ```
 Runs on: http://localhost:8000
 
